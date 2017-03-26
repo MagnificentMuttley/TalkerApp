@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/conversationScreen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:background="@color/colorPrimaryDark"
+>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="500dp">
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/textColorPrimary"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="40dp"
+    />
+</ScrollView>
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="184dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:hint="@string/new_message_placeholder"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColorHint="@color/textColorPrimary"
+        android:textColor="@color/textColorPrimary"
+        android:background="@color/colorPrimary"
+        android:layout_toLeftOf="@+id/sendMsg"
+        android:layout_toStartOf="@+id/sendMsg"/>
+
+    <Button
+        android:id="@+id/sendMsg"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/ic_send_message"
+        android:onClick="sendMsg"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

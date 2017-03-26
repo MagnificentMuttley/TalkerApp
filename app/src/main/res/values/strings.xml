@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Talker</string>
 
+    <string name="log_in">Zaloguj</string>
+    <string name="new_message_placeholder">Wprowadź nową wiadomość...</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
