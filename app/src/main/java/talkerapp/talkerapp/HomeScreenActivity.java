@@ -17,18 +17,18 @@ public class HomeScreenActivity extends Activity
             @Override
             public void run()
             {
-                try
-                {
-                    sleep(2000);
-                    Intent intent = new Intent(getApplicationContext(), AccoutActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-                catch (InterruptedException e)
-                {
-
-                }
+            try
+            {
+                sleep(2000);
+                Intent intent = new Intent(getApplicationContext(), AccoutActivity.class);
+                startActivity(intent);
+                finish();
             }
+            catch (InterruptedException e)
+            {
+
+            }
+        }
         };
         myThread.start();
     }
