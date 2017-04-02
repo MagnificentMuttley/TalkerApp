@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".HomeScreenActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -19,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AccoutActivity"/>
+        <activity android:name=".AccoutActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".MenuActivity"/>
         <activity android:name=".ConversationActivity"/>
     </application>
