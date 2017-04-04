@@ -48,7 +48,7 @@
         android:layout_toRightOf="@+id/imgHarold"
         android:background="@color/colorAccent"
         android:padding="5sp"
-        android:text="Nie robię tych zadań, bo są za łatwe xD"
+        android:text="A właśnie chcałem sprawdzić z czego mamy projekty na 6 sem"
         android:textColor="@color/textColorPrimary"/>
 
     <TextView
@@ -60,7 +60,7 @@
         android:layout_toRightOf="@+id/imgHarold"
         android:background="@color/colorAccent"
         android:padding="5sp"
-        android:text="No co ty"
+        android:text="nieeeeee"
 
         android:textColor="@color/textColorPrimary"
         />
@@ -73,7 +73,7 @@
 
         android:background="@color/colorPrimary"
         android:padding="5sp"
-        android:text="robisz to z fizy na jutro?"
+        android:text="Działa ci strona wydziałowa?"
         android:textColor="@color/textColorPrimary"
         android:layout_marginBottom="32dp"
         android:layout_above="@+id/textView4"
@@ -88,11 +88,24 @@
 
         android:background="@color/colorPrimary"
         android:padding="5sp"
-        android:text="xd"
+        android:text="mhm"
         android:textColor="@color/textColorPrimary"
         android:layout_alignBottom="@+id/imageView2"
         android:layout_toLeftOf="@+id/imageView2"
-        android:layout_toStartOf="@+id/imageView2"/>
+        android:layout_toStartOf="@+id/imageView2" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="50dp"
+        android:layout_height="43dp"
+
+
+        android:layout_alignBottom="@+id/imageView2"
+        android:layout_toLeftOf="@+id/imageView2"
+        android:background="@color/colorPrimary"
+        android:padding="5sp"
+        android:text="mhm"
+        android:textColor="@color/textColorPrimary" />
 
     <TextView
         android:id="@+id/textView11"
@@ -105,7 +118,7 @@
         android:layout_toStartOf="@+id/imageView4"
         android:background="@color/colorPrimary"
         android:padding="5sp"
-        android:text="ty"
+        android:text="Siema"
         android:textColor="@color/textColorPrimary"/>
 
     <EditText
@@ -115,15 +128,13 @@
         android:ems="10"
         android:padding="10sp"
         android:inputType="textPersonName"
-        android:text="@string/new_message_placeholder"
+        android:text=""
         android:textColorHint="@color/textColorDarker"
         android:textColor="@color/textColorPrimary"
         android:background="@color/colorPrimaryDark"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/button"
-        android:layout_toStartOf="@+id/button"/>
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/button"
@@ -135,7 +146,7 @@
         android:layout_gravity="bottom"
         android:background="@drawable/ic_send_message"
         android:backgroundTint="@color/colorAccent"
-        android:onClick="sendMsg"/>
+        android:onClick="HaroldsendMsg2"/>
 
     <ImageView
         android:id="@+id/imageView2"
@@ -148,14 +159,24 @@
         android:layout_marginBottom="13dp"/>
 
     <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="64sp"
+        android:layout_height="64sp"
+        android:layout_above="@+id/editText2"
+        android:layout_marginBottom="13dp"
+        android:layout_toEndOf="@+id/textView11"
+        android:layout_toRightOf="@+id/textView11"
+        app:srcCompat="@mipmap/tomek" />
+
+    <ImageView
         android:id="@+id/imageView4"
         android:layout_width="64sp"
         android:layout_height="64sp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginRight="18dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginRight="22dp"
         app:srcCompat="@mipmap/tomek"
         android:layout_above="@+id/textView7"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

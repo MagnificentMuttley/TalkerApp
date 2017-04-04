@@ -79,7 +79,7 @@
         android:layout_height="43dp"
         android:textColor="@color/textColorPrimary"
 
-        android:text="Nie zrobiłem tych zadań, bo są za łatwe xD"
+        android:text="mhm"
         tools:layout_editor_absoluteX="110dp"
         tools:layout_editor_absoluteY="52dp"
         android:layout_above="@+id/buttonChmielu"
