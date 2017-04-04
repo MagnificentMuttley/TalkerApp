@@ -42,4 +42,11 @@ public class AccoutActivity extends Activity
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        finish();
+    }
 }

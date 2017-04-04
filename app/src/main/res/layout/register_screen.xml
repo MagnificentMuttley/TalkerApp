@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbarRegister"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorAccent"
@@ -21,71 +22,122 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:orientation="vertical"
-                android:background="@color/colorPrimary"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent">
-        <LinearLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:fillViewport="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/usernameLabel"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/register_username"
                 android:textColor="@color/textColorPrimary"
-            />
+                android:textSize="@dimen/textSizePrimary"
+                android:layout_marginTop="35dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"/>
 
             <EditText
-                android:id="@+id/username"
-                android:layout_width="match_parent"
+                android:id="@+id/usernameInput"
+                android:layout_width="wrap_content"
+                android:textColor="@color/textColorPrimary"
                 android:layout_height="wrap_content"
+                android:textColorHighlight="@color/textColorPrimary"
+                android:textColorHint="@color/textColorPrimary"
+                android:textColorLink="@color/textColorPrimary"
                 android:ems="10"
-                android:inputType="textPersonName"/>
+                android:inputType="textPersonName"
+                android:layout_below="@+id/usernameLabel"
+                android:layout_centerHorizontal="true"/>
 
             <TextView
+                android:id="@+id/emailLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/register_email"
                 android:textColor="@color/textColorPrimary"
-                />
-
+                android:layout_marginTop="49dp"
+                android:layout_below="@+id/usernameInput"
+                android:textSize="@dimen/textSizePrimary"
+                android:layout_alignLeft="@+id/usernameLabel"
+                android:layout_alignStart="@+id/usernameLabel"
+                android:layout_alignRight="@+id/usernameLabel"
+                android:layout_alignEnd="@+id/usernameLabel"/>
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/emailInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textEmailAddress"/>
+                android:inputType="textEmailAddress"
+                android:layout_below="@+id/emailLabel"
+                android:textColor="@color/textColorPrimary"
+                android:layout_alignLeft="@+id/usernameInput"
+                android:layout_alignStart="@+id/usernameInput"
+                android:layout_alignRight="@+id/usernameInput"
+                android:layout_alignEnd="@+id/usernameInput"/>
 
             <TextView
+                android:id="@+id/passwordLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/textSizePrimary"
                 android:text="@string/register_password"
                 android:textColor="@color/textColorPrimary"
-                />
+                android:layout_below="@+id/emailInput"
+                android:layout_marginTop="50dp"
+                android:layout_alignLeft="@+id/emailLabel"
+                android:layout_alignStart="@+id/emailLabel"
+                android:layout_alignRight="@+id/emailLabel"
+                android:layout_alignEnd="@+id/emailLabel"/>
 
             <EditText
-                android:id="@+id/pass"
+                android:id="@+id/passwordInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:textColor="@color/textColorPrimary"
+                android:layout_below="@+id/passwordLabel"
+                android:layout_alignLeft="@+id/emailInput"
+                android:layout_alignStart="@+id/emailInput"
+                android:layout_alignRight="@+id/emailInput"
+                android:layout_alignEnd="@+id/emailInput"/>
+
             <TextView
+                android:id="@+id/passwordLabel2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/register_password2"
+                android:textSize="@dimen/textSizePrimary"
                 android:textColor="@color/textColorPrimary"
-                />
+                android:layout_below="@+id/passwordInput"
+                android:layout_marginTop="47dp"
+                android:layout_alignRight="@+id/passwordLabel"
+                android:layout_alignEnd="@+id/passwordLabel"
+                android:layout_alignLeft="@+id/passwordLabel"
+                android:layout_alignStart="@+id/passwordLabel"/>
 
             <EditText
-                android:id="@+id/pass2"
+                android:id="@+id/passwordInput2"
+                android:textColor="@color/textColorPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPassword"/>
-        </LinearLayout>
-</ScrollView>
+                android:inputType="textPassword"
+                android:layout_below="@+id/passwordLabel2"
+                android:layout_alignLeft="@+id/passwordInput"
+                android:layout_alignStart="@+id/passwordInput"
+                android:layout_alignRight="@+id/passwordInput"
+                android:layout_alignEnd="@+id/passwordInput"/>
+        </RelativeLayout>
+    </ScrollView>
 </LinearLayout>
