@@ -101,7 +101,7 @@ public class HaroldActivity extends AppCompatActivity
             // tmp = editText.getText().toString();
             //txtView.setText(tmp);
             tomekText4.setText(wpisywanieTekstu.getText());
-
+            wpisywanieTekstu.setText(null);
 
 
 
