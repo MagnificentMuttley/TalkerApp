@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarRegister"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorAccent"
+            app:titleTextColor="@color/textColorPrimary"
+            app:title="Harold Surname"
+            app:popupTheme="@style/AppTheme.AppBarOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ImageView
+        android:id="@+id/imgHarold"
+        android:layout_width="64sp"
+        android:layout_height="64sp"
+        android:layout_marginBottom="140dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginStart="21dp"
+        android:background="@mipmap/harold01"
+        android:layout_above="@+id/editText2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="232dp"
+        android:layout_height="43dp"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="13dp"
+        android:layout_toEndOf="@+id/imgHarold"
+        android:layout_toRightOf="@+id/imgHarold"
+        android:background="@color/colorAccent"
+        android:padding="5sp"
+        android:text="Nie robię tych zadań, bo są za łatwe xD"
+        android:textColor="@color/textColorPrimary"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="70dp"
+        android:layout_height="43dp"
+        android:layout_alignTop="@+id/imgHarold"
+        android:layout_marginTop="14dp"
+        android:layout_toRightOf="@+id/imgHarold"
+        android:background="@color/colorAccent"
+        android:padding="5sp"
+        android:text="No co ty"
+
+        android:textColor="@color/textColorPrimary"
+        />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="200dp"
+        android:layout_height="43dp"
+
+
+        android:background="@color/colorPrimary"
+        android:padding="5sp"
+        android:text="robisz to z fizy na jutro?"
+        android:textColor="@color/textColorPrimary"
+        android:layout_marginBottom="32dp"
+        android:layout_above="@+id/textView4"
+        android:layout_toLeftOf="@+id/imageView4"
+        android:layout_toStartOf="@+id/imageView4"/>
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="50dp"
+        android:layout_height="43dp"
+
+
+        android:background="@color/colorPrimary"
+        android:padding="5sp"
+        android:text="xd"
+        android:textColor="@color/textColorPrimary"
+        android:layout_alignBottom="@+id/imageView2"
+        android:layout_toLeftOf="@+id/imageView2"
+        android:layout_toStartOf="@+id/imageView2"/>
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="50dp"
+        android:layout_height="43dp"
+
+
+        android:layout_alignBottom="@+id/imageView4"
+        android:layout_toLeftOf="@+id/imageView4"
+        android:layout_toStartOf="@+id/imageView4"
+        android:background="@color/colorPrimary"
+        android:padding="5sp"
+        android:text="ty"
+        android:textColor="@color/textColorPrimary"/>
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:padding="10sp"
+        android:inputType="textPersonName"
+        android:text="@string/new_message_placeholder"
+        android:textColorHint="@color/textColorDarker"
+        android:textColor="@color/textColorPrimary"
+        android:background="@color/colorPrimaryDark"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/button"
+        android:layout_toStartOf="@+id/button"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="50sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="bottom"
+        android:background="@drawable/ic_send_message"
+        android:backgroundTint="@color/colorAccent"
+        android:onClick="sendMsg"/>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="64sp"
+        android:layout_height="64sp"
+        app:srcCompat="@mipmap/tomek"
+        android:layout_above="@+id/editText2"
+        android:layout_toRightOf="@+id/textView11"
+        android:layout_toEndOf="@+id/textView11"
+        android:layout_marginBottom="13dp"/>
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="64sp"
+        android:layout_height="64sp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginRight="18dp"
+        app:srcCompat="@mipmap/tomek"
+        android:layout_above="@+id/textView7"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>
