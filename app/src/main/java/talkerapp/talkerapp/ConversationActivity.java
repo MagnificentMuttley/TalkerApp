@@ -26,7 +26,7 @@ public class ConversationActivity extends Activity
         sendMsg = (Button) findViewById(R.id.sendMsg);
         background = (RelativeLayout)findViewById(R.id.conversationScreen);
         editText = (EditText) findViewById(R.id.editText);
-        txtView = (TextView) findViewById(R.id.textView4);
+        txtView = (TextView) findViewById(R.id.textView19);
     }
 
     public void sendMsg(View view)
