@@ -113,7 +113,7 @@ public class MenuActivity extends AppCompatActivity
     {
         // Przechodzi do ekranu tworzenia nowej wiadomości
         // Akcja na przycisk koperty
-        Intent intent = new Intent(this, ConversationActivity.class);
+        Intent intent = new Intent(this, HaroldActivity.class);
         startActivity(intent);
     }
 }
