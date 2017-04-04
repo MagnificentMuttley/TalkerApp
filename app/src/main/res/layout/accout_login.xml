@@ -115,6 +115,7 @@
         android:textColor="#4444aa"
         android:layout_marginTop="31dp"
         android:text="@string/register_button"
+        android:onClick="register"
         android:layout_below="@+id/loginButton"
         android:layout_centerHorizontal="true"
         tools:ignore="SmallSp"/>

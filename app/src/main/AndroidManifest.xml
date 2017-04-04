@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".AccoutActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".RegisterActivity"/>
         <activity android:name=".MenuActivity"/>
         <activity android:name=".ConversationActivity"/>
     </application>

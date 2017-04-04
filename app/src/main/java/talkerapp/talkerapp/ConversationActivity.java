@@ -35,6 +35,7 @@ public class ConversationActivity extends Activity
         txtView.setText(tmp);
     }
 
+    @Override
     public void onBackPressed()
     {
         // Powraca do ekranu głównego
