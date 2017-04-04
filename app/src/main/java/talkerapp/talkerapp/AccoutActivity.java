@@ -36,6 +36,10 @@ public class AccoutActivity extends Activity
         {
             incorrectLogin.setVisibility(View.VISIBLE);
         }
-
+    }
+    public void register(View view)
+    {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 }
