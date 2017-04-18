@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
     android:orientation="vertical"
+    android:focusableInTouchMode="true"
     >
 
     <ImageView
@@ -57,7 +58,10 @@
             android:inputType="textEmailAddress"
             android:textColor="@color/textColorPrimary"
             android:textColorHint="@color/textColorDarker"
-            android:textSize="@dimen/textSizePrimary"/>
+            android:textSize="@dimen/textSizePrimary"
+            android:cursorVisible="true"
+            android:textCursorDrawable="@null"
+            />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -77,8 +81,10 @@
             android:inputType="textPassword"
             android:gravity="center"
             android:textColor="@color/textColorPrimary"
-            android:textColorHint="@color/textColorDarker"
-            android:textSize="@dimen/textSizePrimary"/>
+            android:cursorVisible="true"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/textSizePrimary"
+            />
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -106,8 +112,8 @@
         android:layout_marginTop="10dp"
         android:text="@string/register_info"/>
 
-    <Button
-        android:id="@+id/registerButton"
+    <TextView
+        android:id="@+id/registerScreenButton"
         android:layout_width="wrap_content"
         android:layout_height="16dp"
         android:background="@color/colorAccent"
@@ -118,5 +124,5 @@
         android:onClick="register"
         android:layout_below="@+id/loginButton"
         android:layout_centerHorizontal="true"
-        tools:ignore="SmallSp"/>
+        />
 </RelativeLayout>

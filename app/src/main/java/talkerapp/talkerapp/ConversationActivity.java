@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,6 +20,8 @@ public class ConversationActivity extends AppCompatActivity
     TextView txtView;
     String tmp;
     Toolbar toolbar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -29,6 +32,8 @@ public class ConversationActivity extends AppCompatActivity
         txtView = (TextView) findViewById(R.id.textView19);
         toolbar = (Toolbar)findViewById(R.id.toolbarRegister);
         setSupportActionBar(toolbar);
+
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -45,8 +50,7 @@ public class ConversationActivity extends AppCompatActivity
 
     public void sendMsg(View view)
     {
-        tmp = editText.getText().toString();
-        txtView.setText(tmp);
+
     }
 
     @Override

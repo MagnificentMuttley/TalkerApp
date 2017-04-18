@@ -25,7 +25,6 @@
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".MenuActivity"/>
         <activity android:name=".ConversationActivity"/>
-        <activity android:name=".HaroldActivity"/>
     </application>
 
 </manifest>

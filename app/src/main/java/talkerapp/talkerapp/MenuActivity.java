@@ -109,11 +109,4 @@ public class MenuActivity extends AppCompatActivity
         Intent intent = new Intent(this, ConversationActivity.class);
         startActivity(intent);
     }
-    public void Harold_Prezentacja(View view)
-    {
-        // Przechodzi do ekranu tworzenia nowej wiadomości
-        // Akcja na przycisk koperty
-        Intent intent = new Intent(this, HaroldActivity.class);
-        startActivity(intent);
-    }
 }
