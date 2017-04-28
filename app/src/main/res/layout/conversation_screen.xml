@@ -33,7 +33,7 @@
         android:ems="10"
         android:padding="10sp"
         android:inputType="textPersonName"
-        android:text="@string/new_message_placeholder"
+        android:hint="@string/new_message_placeholder"
         android:textColorHint="@color/textColorDarker"
         android:textColor="@color/textColorPrimary"
         android:background="@color/colorPrimaryDark"

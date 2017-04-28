@@ -25,7 +25,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorPrimaryDark"
         android:fillViewport="true"
         android:orientation="vertical">
 
@@ -138,6 +138,21 @@
                 android:layout_alignStart="@+id/passwordInput"
                 android:layout_alignRight="@+id/passwordInput"
                 android:layout_alignEnd="@+id/passwordInput"/>
+
+            <Button
+                android:id="@+id/registerButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/passwordInput2"
+                android:layout_alignLeft="@+id/passwordInput2"
+                android:layout_alignRight="@+id/passwordInput2"
+                android:layout_alignStart="@+id/passwordInput2"
+                android:layout_below="@+id/passwordInput2"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/textColorPrimary"
+                android:background="@color/colorAccent"
+                android:textAllCaps="false"
+                android:text="@string/register_button"/>
         </RelativeLayout>
     </ScrollView>
 </LinearLayout>

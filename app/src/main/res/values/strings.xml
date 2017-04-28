@@ -2,7 +2,7 @@
     <string name="app_name">Talker</string>
 
     <string name="log_in">Zaloguj</string>
-    <string name="register_button">Zarejestruj się.</string>
+    <string name="register_button">Zarejestruj się</string>
     <string name="register_title">Rejestracja</string>
     <string name="register_username">Nazwa użytkownika:</string>
     <string name="register_email">E-mail:</string>
