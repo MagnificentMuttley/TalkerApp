@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     FloatingActionButton fab;
@@ -33,7 +34,7 @@ public class MenuActivity extends AppCompatActivity
         setContentView(R.layout.activity_menu);
         Intent intent = getIntent();
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbarT);
         setSupportActionBar(toolbar);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -41,11 +42,29 @@ public class MenuActivity extends AppCompatActivity
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-
-         toggle.syncState();
-
+    
+        toggle.syncState();
+      
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+//        List<Person> lista = new ArrayList<Person>();
+//        List<TextView> contacts = new ArrayList<TextView>();
+//        for(int i = 0; i < 5; i++)
+//        {
+//            lista.add(new Person("imie" + i, "nazwisko" + i, "opis" + i));
+//        }
+//        for (Person item: lista)
+//        {
+//            TextView tmp = new TextView(this);
+//            tmp.setText(item.getName());
+//            tmp.setTextColor(getResources().getColor(R.color.textColorPrimary));
+//
+//            contacts.add(new TextView(this));
+//        }
+//        for (TextView item: contacts)
+//        {
+//            item.setVisibility(View.VISIBLE);
+//        }
     }
 
     @Override
@@ -63,6 +82,7 @@ public class MenuActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);
+        
         return true;
     }
 
@@ -87,16 +107,30 @@ public class MenuActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_profile) {
-            // Handle the profile action
-        } else if (id == R.id.nav_friends) {
-
-        } else if (id == R.id.nav_settings) {
-
-        } else if (id == R.id.nav_logout) {
-
+        if (id == R.id.nav_profile)
+        {
+            Intent intent = new Intent(this, ProfileViewActivity.class);
+            startActivity(intent);        item.setChecked(false);
+    
         }
-
+        else if (id == R.id.nav_friends)
+        {
+            Intent intent = new Intent(this, FriendsListActivity.class);
+            startActivity(intent);        item.setChecked(false);
+    
+        }
+        else if (id == R.id.nav_settings)
+        {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);        item.setChecked(false);
+    
+        }
+        else if (id == R.id.nav_logout)
+        {
+            Intent intent = new Intent(this, AccoutActivity.class);
+            startActivity(intent);        item.setChecked(false);
+    
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

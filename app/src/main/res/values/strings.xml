@@ -1,21 +1,27 @@
 <resources>
     <string name="app_name">Talker</string>
 
-    <string name="log_in">Zaloguj</string>
-    <string name="register_button">Zarejestruj się</string>
-    <string name="register_title">Rejestracja</string>
-    <string name="register_username">Nazwa użytkownika:</string>
-    <string name="register_email">E-mail:</string>
-    <string name="register_password">Hasło:</string>
-    <string name="register_password2">Powtórz hasło:</string>
-    <string name="register_info">Nie masz konta?</string>
+    <string name="incorrectLogin">Niepoprawny login lub hasło</string>
     <string name="login_placeholder">Login</string>
     <string name="password_placeholder">Hasło</string>
-    <string name="incorrectLogin">Niepoprawny login lub hasło</string>
-    <string name="new_message_placeholder">Wprowadź nową wiadomość</string>
+    <string name="log_in">Zaloguj</string>
+    <string name="register_info">Nie masz konta?</string>
+    <string name="register_button">Zarejestruj się</string>
+        <string name="register_title">Rejestracja</string>
+        <string name="register_username">Nazwa użytkownika:</string>
+        <string name="register_email">E-mail:</string>
+        <string name="register_password">Hasło:</string>
+        <string name="register_password2">Powtórz hasło:</string>
+
+    <string name="my_profile">Mój profil</string>
+    <string name="settings">Ustawienia</string>
+    <string name="logout">Wyloguj</string>
+    <string name="my_friends">Znajomi</string>
+
+
     <string name="contacts_title">Kontakty</string>
+    <string name="new_message_placeholder">Wprowadź nową wiadomość</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_settings">Ustawienia</string>
 </resources>

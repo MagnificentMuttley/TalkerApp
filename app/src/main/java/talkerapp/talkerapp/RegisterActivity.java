@@ -16,11 +16,12 @@ public class RegisterActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         setContentView(R.layout.register_screen);
-        toolbar = (Toolbar)findViewById(R.id.toolbarRegister);
+        toolbar = (Toolbar)findViewById(R.id.toolbarT);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setTitle(R.string.register_title);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener()
         {
