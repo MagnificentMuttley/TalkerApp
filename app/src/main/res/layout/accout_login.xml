@@ -6,19 +6,18 @@
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
     android:orientation="vertical"
+    android:focusableInTouchMode="true"
     >
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/talker_logo"
+        android:src="@drawable/logo"
+        android:layout_marginBottom="12dp"
         android:layout_above="@+id/incorrectLogin"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="29dp"
-        android:contentDescription=""
-        tools:ignore="ContentDescription"/>
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:id="@+id/incorrectLogin"
@@ -30,7 +29,6 @@
         android:layout_above="@+id/textInputLayout3"
         android:layout_alignLeft="@+id/textInputLayout3"
         android:layout_alignStart="@+id/textInputLayout3"
-        android:layout_marginBottom="10dp"
         android:layout_alignRight="@+id/textInputLayout3"
         android:layout_alignEnd="@+id/textInputLayout3"/>
 
@@ -57,7 +55,10 @@
             android:inputType="textEmailAddress"
             android:textColor="@color/textColorPrimary"
             android:textColorHint="@color/textColorDarker"
-            android:textSize="@dimen/textSizePrimary"/>
+            android:textSize="@dimen/textSizePrimary"
+            android:cursorVisible="true"
+            android:textCursorDrawable="@null"
+            />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -77,15 +78,17 @@
             android:inputType="textPassword"
             android:gravity="center"
             android:textColor="@color/textColorPrimary"
-            android:textColorHint="@color/textColorDarker"
-            android:textSize="@dimen/textSizePrimary"/>
+            android:cursorVisible="true"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/textSizePrimary"
+            />
     </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:onClick="logIn"
         android:text="@string/log_in"
         android:textColor="@color/textColorPrimary"
@@ -106,8 +109,8 @@
         android:layout_marginTop="10dp"
         android:text="@string/register_info"/>
 
-    <Button
-        android:id="@+id/registerButton"
+    <TextView
+        android:id="@+id/registerScreenButton"
         android:layout_width="wrap_content"
         android:layout_height="16dp"
         android:background="@color/colorAccent"
@@ -118,5 +121,5 @@
         android:onClick="register"
         android:layout_below="@+id/loginButton"
         android:layout_centerHorizontal="true"
-        tools:ignore="SmallSp"/>
+        />
 </RelativeLayout>

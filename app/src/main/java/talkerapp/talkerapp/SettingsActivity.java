@@ -1,28 +1,28 @@
 package talkerapp.talkerapp;
+
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 
-public class RegisterActivity extends AppCompatActivity
+public class SettingsActivity extends AppCompatActivity
 {
     Toolbar toolbar;
-    Button register;
+    Color color;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.settings_screen);
         Intent intent = getIntent();
-        setContentView(R.layout.register_screen);
         toolbar = (Toolbar)findViewById(R.id.toolbarT);
         setSupportActionBar(toolbar);
-
+        toolbar.setTitle(R.string.settings);
+        
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.setTitle(R.string.register_title);
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -31,14 +31,5 @@ public class RegisterActivity extends AppCompatActivity
                 onBackPressed();
             }
         });
-        register = (Button)findViewById(R.id.registerButton);
-    }
-
-    @Override
-    public void onBackPressed()
-    {
-        super.onBackPressed();
-        Intent intent = new Intent(this, AccoutActivity.class);
-        startActivity(intent);
     }
 }

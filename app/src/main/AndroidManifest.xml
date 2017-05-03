@@ -24,8 +24,10 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".MenuActivity"/>
+        <activity android:name=".FriendsListActivity"/>
+        <activity android:name=".ProfileViewActivity"/>
+        <activity android:name=".SettingsActivity"/>
         <activity android:name=".ConversationActivity"/>
-        <activity android:name=".HaroldActivity"/>
     </application>
 
 </manifest>
