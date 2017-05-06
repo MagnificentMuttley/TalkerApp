@@ -3,8 +3,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import tomek.UserAdd;
+import tomek.WSocket;
 
 public class RegisterActivity extends AppCompatActivity
 {
@@ -41,4 +46,26 @@ public class RegisterActivity extends AppCompatActivity
         Intent intent = new Intent(this, AccoutActivity.class);
         startActivity(intent);
     }
+    public void tomek_rejestracja(View view) {
+        TextView userName = (TextView) findViewById(R.id.usernameInput);
+        TextView userEmail = (TextView) findViewById(R.id.emailInput);
+        TextView userPassword = (TextView) findViewById(R.id.passwordInput);
+
+
+        UserAdd addedUser = new UserAdd(userEmail.getText().toString(), userPassword.getText().toString(), userName.getText().toString());
+        //region WebSocket
+
+        try {
+            WSocket wSocket = new WSocket();
+            wSocket.sendData(addedUser);
+
+        } catch (Exception e) {
+            Log.e("Except", "Wyjatek", e);
+            // e.toString();
+            //  Log.d("Except", e.getMessage().toString());
+        }
+        //endregion
+        //userPassword.setText((String[])addedUser);
+    }
+
 }
