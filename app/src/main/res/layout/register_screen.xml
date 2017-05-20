@@ -138,7 +138,8 @@
                 android:background="@color/colorAccent"
                 android:text="@string/register_button"
                 android:textAllCaps="false"
-                android:textColor="@color/textColorPrimary"/>
+                android:textColor="@color/textColorPrimary"
+                android:onClick="tomek_rejestracja"/>
         </RelativeLayout>
     </ScrollView>
 </LinearLayout>
