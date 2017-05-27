@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity
         //region WebSocket
 
         try {
-            WSocket wSocket = new WSocket();
+            WSocket wSocket = WSocket.getwSocketInstance();
             wSocket.sendData(addedUser);
 
         } catch (Exception e) {

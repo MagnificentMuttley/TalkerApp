@@ -22,12 +22,13 @@ public class WSocket {
 
     private static final String SERVER = "ws://talker-node.herokuapp.com";
     private static final int TIMEOUT = 5000;
+    private static WSocket wSocketInstance = null;
 
     public WebSocketFactory factory;
     public WebSocket ws;
 
 
-    public WSocket() throws Exception {
+    private WSocket() throws Exception {
         factory = new WebSocketFactory().setConnectionTimeout(TIMEOUT);
         ws = factory.createSocket(SERVER);
 
@@ -39,6 +40,16 @@ public class WSocket {
         });
 
         ws.connectAsynchronously();
+    }
+
+    public static WSocket getwSocketInstance(){
+        if(wSocketInstance==null)
+            try {
+                wSocketInstance = new WSocket();
+            }
+            catch (Exception ex)
+            {}
+        return wSocketInstance;
     }
 
     public void sendData(Object obj) {
