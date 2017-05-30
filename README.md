@@ -6,3 +6,12 @@ Każdy kontrubutor używa własnego brancha i w nim wprowadza zmiany.
 
 Zmienne globalne, typu kolory, teksty do wyświetlenia znajdują się w odopwiednich plikach w folderze: 
 	app/src/main/res/values/
+
+Gradle
+------
+
+```Gradle
+dependencies {
+    compile 'com.neovisionaries:nv-websocket-client:2.2'
+}
+```
