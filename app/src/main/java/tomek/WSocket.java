@@ -52,6 +52,7 @@ public class WSocket {
         return wSocketInstance;
     }
 
+
     public void sendData(Object obj) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutput out = null;
