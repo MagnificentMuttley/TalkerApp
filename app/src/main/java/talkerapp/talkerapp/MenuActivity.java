@@ -47,24 +47,6 @@ public class MenuActivity extends AppCompatActivity
       
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-//        List<Person> lista = new ArrayList<Person>();
-//        List<TextView> contacts = new ArrayList<TextView>();
-//        for(int i = 0; i < 5; i++)
-//        {
-//            lista.add(new Person("imie" + i, "nazwisko" + i, "opis" + i));
-//        }
-//        for (Person item: lista)
-//        {
-//            TextView tmp = new TextView(this);
-//            tmp.setText(item.getName());
-//            tmp.setTextColor(getResources().getColor(R.color.textColorPrimary));
-//
-//            contacts.add(new TextView(this));
-//        }
-//        for (TextView item: contacts)
-//        {
-//            item.setVisibility(View.VISIBLE);
-//        }
     }
 
     @Override
@@ -82,7 +64,6 @@ public class MenuActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);
-        
         return true;
     }
 

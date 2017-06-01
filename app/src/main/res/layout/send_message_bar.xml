@@ -9,7 +9,6 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
         <EditText
@@ -21,9 +20,7 @@
             android:textColor="@color/textColorPrimary"
             android:textColorHighlight="@color/colorAccent"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_toLeftOf="@+id/button"
             android:layout_toStartOf="@+id/button" />
 
         <Button
@@ -31,9 +28,7 @@
             android:layout_width="54dp"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_send_msg"
-            android:backgroundTint="@color/colorAccent"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
 </RelativeLayout>

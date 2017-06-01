@@ -21,53 +21,21 @@ public class FriendsListActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.friends_list_screen);
+        setContentView(R.layout.settings_screen);
         Intent intent = getIntent();
-//        ArrayList<TextView> contacts = new ArrayList<TextView>();
-//        ArrayList<Person> friendsList = new ArrayList<Person>();
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewFriends);
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(mLinearLayoutManager);
-        
-//        toolbar = (Toolbar)findViewById(R.id.toolbarT);
-//        setSupportActionBar(toolbar);
-//
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                onBackPressed();
-//            }
-//        });
-//        toolbar.setTitle(R.string.my_friends);
-
-//        for (int i = 0; i < 10; i++)
-//        {
-//            friendsList.add(new Person("Imie " + (i + 1), "Nazwisko "  + (i + 1), "Last Message " + (i + 1)));
-//        }
-//        for (Person item : friendsList)
-//        {
-//            TextView tmp = new TextView(this);
-//            tmp.setTextColor(getResources().getColor(R.color.textColorPrimary));
-//            tmp.setGravity(Gravity.CENTER_HORIZONTAL);
-//            tmp.setTextSize(20);
-//            tmp.setText(item.getName() + " " + item.getSurname());
-//            contacts.add(tmp);
-//
-//            TextView tmp2 = new TextView(this);
-//            tmp2.setTextColor(getResources().getColor(R.color.textColorPrimary));
-//            tmp2.setGravity(Gravity.CENTER_HORIZONTAL);
-//            tmp2.setTextSize(20);
-//            tmp2.setText(item.getTxt());
-//            contacts.add(tmp2);
-//        }
-//
-//        for (int i = 0; i < contacts.size(); i++)
-//        {
-//            recyclerView.addView(contacts.get(i));
-//        }
+        toolbar = (Toolbar)findViewById(R.id.toolbarT);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle(R.string.my_friends);
+    
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                onBackPressed();
+            }
+        });
     }
 }

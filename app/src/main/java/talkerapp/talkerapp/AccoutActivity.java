@@ -18,21 +18,22 @@ import java.io.InputStreamReader;
 
 public class AccoutActivity extends Activity
 {
-    EditText login;
-    EditText password;
-    TextView incorrectLogin;
-    Button logButton;
-    String fileName;
+    private EditText login;
+    private EditText password;
+    private TextView incorrectLogin;
+    private Button logButton;
+    private String fileName;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         setContentView(R.layout.accout_login);
+        
         fileName = "loginData";
         incorrectLogin = (TextView)findViewById(R.id.incorrectLogin);
-        login = (EditText)findViewById(R.id.inputLogin);
-        password = (EditText)findViewById(R.id.inputPassword);
+        login = (EditText)findViewById(R.id.login_email_input);
+        password = (EditText)findViewById(R.id.login_password_input);
         incorrectLogin.setVisibility(View.INVISIBLE);
         logButton = (Button)findViewById(R.id.loginButton);
         try
@@ -74,6 +75,7 @@ public class AccoutActivity extends Activity
             incorrectLogin.setVisibility(View.VISIBLE);
         }
     }
+    
     public void register(View view)
     {
         Intent intent = new Intent(this, RegisterActivity.class);

@@ -9,8 +9,8 @@ import android.widget.Button;
 
 public class ConversationActivity extends AppCompatActivity
 {
-    Button sendMsg;
-    Toolbar toolbar;
+    private Button sendMsg;
+    private Toolbar toolbar;
     
     @Override
     protected void onCreate(Bundle savedInstanceState)

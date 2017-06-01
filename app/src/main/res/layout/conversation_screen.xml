@@ -4,38 +4,8 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorPrimary"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/colorPrimary">
 
     <include layout="@layout/toolbar"/>
     <include layout="@layout/send_message_bar" />
-    <!--<EditText-->
-        <!--android:id="@+id/editText2"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:ems="10"-->
-        <!--android:padding="10sp"-->
-        <!--android:inputType="textPersonName"-->
-        <!--android:hint="@string/new_message_placeholder"-->
-        <!--android:textColorHint="@color/textColorDarker"-->
-        <!--android:textColor="@color/textColorPrimary"-->
-        <!--android:background="@color/colorPrimaryDark"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_toStartOf="@+id/sendMsg"-->
-        <!--android:layout_alignTop="@+id/sendMsg"-->
-        <!--android:layout_alignParentBottom="true"/>-->
-
-    <!--<Button-->
-        <!--android:id="@+id/sendMsg"-->
-        <!--android:layout_width="50sp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_gravity="bottom"-->
-        <!--android:background="@drawable/ic_send_message"-->
-        <!--android:backgroundTint="@color/colorAccent"-->
-        <!--android:onClick="sendMsg"/>-->
-
 </RelativeLayout>
