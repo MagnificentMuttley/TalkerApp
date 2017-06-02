@@ -4,9 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import tomek.UserAdd;
 import tomek.WSocket;
@@ -117,25 +121,21 @@ public class RegisterActivity extends AppCompatActivity
             WSocket wSocket = WSocket.getwSocketInstance();
             wSocket.sendData(addedUser.JSONStrigify().toString());
             Log.d("Wiadomosc", "Wyslano jstringa");
-
-        } catch (Exception e) {
-            Log.e("Except", "Wyjatek", e);
-            wSocket.sendData(addedUser);
             text.setText(getString(R.string.register_success) + getString(R.string.logged));
             toast.show();
             Intent intent = new Intent(this, MenuActivity.class);
             startActivity(intent);
-        }
-        catch (Exception e)
-        {
+
+        } catch (Exception e) {
+            Log.e("Except", "Wyjatek", e);
             layout.setBackgroundColor(getResources().getColor(R.color.warningColor));
             text.setText(getString(R.string.register_error));
             toast.show();
             // e.toString();
             //  Log.d("Except", e.getMessage().toString());
+            
         }
         //endregion
         //userPassword.setText((String[])addedUser);
     }
-
 }
