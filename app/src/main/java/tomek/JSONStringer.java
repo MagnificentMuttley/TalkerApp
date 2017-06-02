@@ -9,5 +9,5 @@ import java.util.ArrayList;
  */
 
 public interface JSONStringer {
-    public JSONObject JSONStrigify(String scope, String method, ArrayList<String> fields);
+    public JSONObject JSONStrigify();
 }

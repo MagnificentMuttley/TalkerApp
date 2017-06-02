@@ -57,7 +57,8 @@ public class RegisterActivity extends AppCompatActivity
 
         try {
             WSocket wSocket = WSocket.getwSocketInstance();
-            wSocket.sendData(addedUser);
+            wSocket.sendData(addedUser.JSONStrigify().toString());
+            Log.d("Wiadomosc", "Wyslano jstringa");
 
         } catch (Exception e) {
             Log.e("Except", "Wyjatek", e);

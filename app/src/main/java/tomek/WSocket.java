@@ -53,42 +53,9 @@ public class WSocket {
     }
 
 
-    public void sendData(Object obj) {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ObjectOutput out = null;
-        try {
-            out = new ObjectOutputStream(bos);
-            out.writeObject(obj);
-            out.flush();
-            byte[] serializedBytes = bos.toByteArray();
-            ws.sendBinary(serializedBytes);
-
-
-            Log.d("Wiadomość", "Wysłano :" + serializedBytes.toString());
-
-
-            ByteArrayInputStream bis = new ByteArrayInputStream(serializedBytes);
-            ObjectInput in = null;
-            try {
-                in = new ObjectInputStream(bis);
-                Object o = in.readObject();
-                if (in != null) {
-                    in.close();
-                }
-                UserAdd useradded = (UserAdd) o;
-                Log.d("Wiadomość", "Wysłano :" + useradded.getUserName() + " " + useradded.getEmail() + " " + useradded.getPassword());
-
-            } catch (Exception ex) {
-                // ignore close exception
-            }
-
-
-        } catch (Exception ex) {
-            Log.d("Wiadomosc", "Nie wysłano");
-
-            // ignore close exception
-        }
-
+    public void sendData(String jsonString) {
+        ws.sendText(jsonString);
+        Log.d("Wiadomosc", "Wyslano: "+jsonString);
     }
 
     public void disconnect() {
