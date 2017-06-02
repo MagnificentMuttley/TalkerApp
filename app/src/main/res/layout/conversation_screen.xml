@@ -7,5 +7,13 @@
     android:background="@color/colorPrimary">
 
     <include layout="@layout/toolbar"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/conversation_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
     <include layout="@layout/send_message_bar" />
 </RelativeLayout>

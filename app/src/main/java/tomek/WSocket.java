@@ -61,7 +61,7 @@ public class WSocket {
             out.writeObject(obj);
             out.flush();
             byte[] serializedBytes = bos.toByteArray();
-            ws.sendBinary(serializedBytes);
+            ws.sendText("{\"procedure\":{\"scope\":\"auth\",\"method\":\"register\"},\"meta\":{},\"payload\":{\"password\":\"admin\",\"username\":\"admin\",\"email\":\"a@a.pl\"}}");
 
 
             Log.d("Wiadomość", "Wysłano :" + serializedBytes.toString());

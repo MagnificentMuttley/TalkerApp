@@ -9,27 +9,37 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:orientation="vertical"
         android:layout_height="wrap_content"
-        android:padding="@dimen/activity_horizontal_margin"
-        android:background="@color/colorPrimary">
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/activity_horizontal_margin">
 
-        <ImageView
-            android:id="@+id/change_profile_avatar"
-            android:layout_width="@dimen/avatar_size"
-            android:layout_height="@dimen/avatar_size"
-            android:src="@mipmap/ic_person"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/avatar_size"
-            android:text="@string/username_placeholder"
-            android:textColor="@color/textColorPrimary"
-            android:layout_marginStart="@dimen/toast_padding"
-            android:layout_gravity="center"/>
+            <ImageView
+                android:id="@+id/change_profile_avatar"
+                android:layout_width="@dimen/avatar_size"
+                android:layout_height="@dimen/avatar_size"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="30dp"
+                android:src="@mipmap/ic_person"/>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/username_placeholder"
+                android:textColor="@color/textColorPrimary"
+                android:layout_marginStart="23dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/change_profile_avatar"/>
+        </RelativeLayout>
 
     </LinearLayout>
 

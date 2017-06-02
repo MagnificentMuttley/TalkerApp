@@ -18,7 +18,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
         android:layout_marginTop="@dimen/margin_standard"
         android:layout_marginLeft="@dimen/margin_standard"
         android:layout_marginRight="@dimen/margin_standard"
@@ -33,7 +32,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
                 android:padding="@dimen/padding_standard"
                 android:orientation="vertical">
 
@@ -50,11 +48,14 @@
                     android:id="@+id/login_email_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textCursorDrawable="@null"
                     android:ems="10"
                     android:drawablePadding="@dimen/padding_standard"
-                    android:textColorHint="@color/textColorDarker"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:textColorHint="@color/textColorPrimary"
                     android:inputType="textEmailAddress"
                     android:hint="@string/email_placeholder"
+                    android:textColorHighlight="@color/colorPrimary"
                     android:textColor="@color/textColorPrimary"
                     android:drawableStart="@android:drawable/sym_action_email"
                     android:layout_marginTop="@dimen/margin_standard"/>
@@ -62,13 +63,16 @@
                 <EditText
                     android:id="@+id/login_password_input"
                     android:layout_width="match_parent"
+                    android:textCursorDrawable="@null"
+                    android:backgroundTint="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:drawablePadding="@dimen/padding_standard"
                     android:inputType="textPassword"
                     android:hint="@string/password_placeholder"
+                    android:textColorHighlight="@color/colorPrimary"
                     android:textColor="@color/textColorPrimary"
-                    android:textColorHint="@color/textColorDarker"
+                    android:textColorHint="@color/textColorPrimary"
                     android:drawableStart="@android:drawable/ic_lock_idle_lock"
                     android:layout_marginTop="@dimen/margin_standard"/>
 
@@ -77,7 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_standard"
-                    android:background="@color/colorAccent"
+                    android:background="@color/colorPrimary"
                     android:text="@string/log_in"
                     android:textAllCaps="false"
                     android:onClick="logIn"

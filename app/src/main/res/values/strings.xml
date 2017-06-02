@@ -22,9 +22,10 @@
         <string name="register_password2">Powtórz hasło:</string>
 
     <string name="my_profile">Mój profil</string>
+    <string name="my_friends">Znajomi</string>
+    <string name="friends_search">Szukaj znajomych</string>
     <string name="settings">Ustawienia</string>
     <string name="logout">Wyloguj</string>
-    <string name="my_friends">Znajomi</string>
 
     <string name="contacts_title">Kontakty</string>
     <string name="new_message_placeholder">Wprowadź nową wiadomość</string>
