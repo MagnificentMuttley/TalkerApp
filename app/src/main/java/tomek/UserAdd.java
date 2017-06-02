@@ -33,7 +33,9 @@ public class UserAdd extends User implements JSONStringer {
     }
 
     @Override
-    public JSONObject JSONStrigify(String scope, String method, ArrayList<String> fields) {
+    public JSONObject JSONStrigify() {
+        String scope = "auth";
+        String method = "register";
 
         JSONObject procedureObject = new JSONObject();
         JSONObject headerObject = new JSONObject();
@@ -44,16 +46,9 @@ public class UserAdd extends User implements JSONStringer {
         try {
             procedureObject.put("scope", scope);
             procedureObject.put("method", method);
-
-            for (String param : fields) {
-                if (param == "password")
-                    payloadObject.put(param, this.getPassword());
-                if (param == "userName")
-                    payloadObject.put(param, this.getUserName());
-                if (param == "email")
-                    payloadObject.put(param, this.getEmail());
-            }
-
+            payloadObject.put("password", this.getPassword());
+            payloadObject.put("username", this.getUserName());
+            payloadObject.put("email", this.getEmail());
             headerObject.put("token", this.getToken());
             finalObject.put("procedure", procedureObject);
             finalObject.put("meta", headerObject);
