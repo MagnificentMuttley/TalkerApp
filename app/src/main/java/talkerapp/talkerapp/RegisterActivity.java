@@ -1,4 +1,5 @@
 package talkerapp.talkerapp;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,8 +16,7 @@ import android.widget.Toast;
 import tomek.UserAdd;
 import tomek.WSocket;
 
-public class RegisterActivity extends AppCompatActivity
-{
+public class RegisterActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private Button registerButton;
     private EditText username;
@@ -27,10 +27,9 @@ public class RegisterActivity extends AppCompatActivity
     private View layout;
     private TextView text;
     private LayoutInflater inflater;
-    
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         setContentView(R.layout.register_screen);
@@ -46,45 +45,38 @@ public class RegisterActivity extends AppCompatActivity
         toast.setView(layout);
         toast.setDuration(Toast.LENGTH_SHORT);
         text = (TextView) layout.findViewById(R.id.toastText);
-    
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setTitle(R.string.register_title);
-        
-        toolbar.setNavigationOnClickListener(new View.OnClickListener()
-        {
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 onBackPressed();
             }
         });
-        
-        registerButton.setOnClickListener(new View.OnClickListener()
-        {
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 if (username.getText().toString().equals(""))
                     username.setError(getResources().getString(R.string.empty_data));
                 else
                     username.setError(null);
-    
+
                 if (email.getText().toString().equals(""))
                     email.setError(getResources().getString(R.string.empty_data));
                 else
                     email.setError(null);
-                
+
                 if (password.getText().toString().equals(passwordConfirm.getText().toString())
                         && !password.getText().toString().equals("")
-                        && !passwordConfirm.getText().toString().equals(""))
-                {
+                        && !passwordConfirm.getText().toString().equals("")) {
                     password.setError(null);
                     passwordConfirm.setError(null);
-                }
-                else
-                {
+                } else {
                     if (password.getText().toString().equals(""))
                         password.setError(getResources().getString(R.string.empty_data));
                     else
@@ -102,29 +94,28 @@ public class RegisterActivity extends AppCompatActivity
             }
         });
     }
-    
+
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         super.onBackPressed();
         Intent intent = new Intent(this, AccoutActivity.class);
         startActivity(intent);
     }
-    
-    public void SendRegisterData()
-    {
+
+    public void SendRegisterData() {
         UserAdd addedUser = new UserAdd(email.getText().toString(), password.getText().toString(), username.getText().toString());
         //region WebSocket
-        
-        try
-        {
+
+        try {
             WSocket wSocket = WSocket.getwSocketInstance();
             wSocket.sendData(addedUser.JSONStrigify().toString());
-            Log.d("Wiadomosc", "Wyslano jstringa");
+            //Log.d("Wiadomosc", "Wyslano jstringa");
             text.setText(getString(R.string.register_success) + getString(R.string.logged));
             toast.show();
-            Intent intent = new Intent(this, MenuActivity.class);
-            startActivity(intent);
+
+
+            // Intent intent = new Intent(this, MenuActivity.class);
+            //  startActivity(intent);
 
         } catch (Exception e) {
             Log.e("Except", "Wyjatek", e);
@@ -133,7 +124,7 @@ public class RegisterActivity extends AppCompatActivity
             toast.show();
             // e.toString();
             //  Log.d("Except", e.getMessage().toString());
-            
+
         }
         //endregion
         //userPassword.setText((String[])addedUser);

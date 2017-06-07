@@ -46,8 +46,8 @@ public class UserAdd extends User implements JSONStringer {
         try {
             procedureObject.put("scope", scope);
             procedureObject.put("method", method);
-            payloadObject.put("password", this.getPassword());
             payloadObject.put("username", this.getUserName());
+            payloadObject.put("password", this.getPassword());
             payloadObject.put("email", this.getEmail());
             headerObject.put("token", this.getToken());
             finalObject.put("procedure", procedureObject);
