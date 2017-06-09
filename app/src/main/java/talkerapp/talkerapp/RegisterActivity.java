@@ -13,9 +13,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import tomek.UserAdd;
 import tomek.UserLogged;
 import tomek.WSocket;
+
+import static tomek.UserLogged.LoggedUserInfo;
 
 public class RegisterActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -120,10 +124,22 @@ public class RegisterActivity extends AppCompatActivity {
                         wSocket.notifier.wait();
                         Log.d("wSocket status", wSocket.status);
                         if (wSocket.status.equals("200") ) {
-                            UserLogged userLogged = new UserLogged(addedUser.getEmail(),addedUser.getUserName(),wSocket.payload);
+                            String token = wSocket.payload;
+                            wSocket.sendData(LoggedUserInfo(token).toString());
 
-                            text.setText(getString(R.string.register_success) + getString(R.string.logged));
-                            toast.show();
+                            synchronized (wSocket.notifier) {
+                                try {
+                                    wSocket.notifier.wait();
+
+                                    JSONObject payload = wSocket.jsonMsg.getJSONObject("payload");
+
+                                    UserLogged userLogged = UserLogged.setUserLoggedInstance(payload.getString("email"), payload.getString("username"), token, payload.getString("id"), payload.getString("avatarID"));
+
+                                    text.setText(getString(R.string.register_success) + getString(R.string.logged));
+                                    toast.show();
+                                } catch (InterruptedException inexe) {
+                                }
+                            }
                             Intent intent = new Intent(this, MenuActivity.class);
                             startActivity(intent);
 
