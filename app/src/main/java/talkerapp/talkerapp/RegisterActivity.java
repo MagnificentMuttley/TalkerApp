@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import tomek.UserAdd;
+import tomek.UserLogged;
 import tomek.WSocket;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -102,20 +103,38 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    int press = 0;
+
     public void SendRegisterData() {
         UserAdd addedUser = new UserAdd(email.getText().toString(), password.getText().toString(), username.getText().toString());
         //region WebSocket
-
+        press++;
         try {
             WSocket wSocket = WSocket.getwSocketInstance();
             wSocket.sendData(addedUser.JSONStrigify().toString());
             //Log.d("Wiadomosc", "Wyslano jstringa");
-            text.setText(getString(R.string.register_success) + getString(R.string.logged));
-            toast.show();
+            if (press > 1)
 
+                synchronized (wSocket.notifier) {
+                    try {
+                        wSocket.notifier.wait();
+                        Log.d("wSocket status", wSocket.status);
+                        if (wSocket.status.equals("200") ) {
+                            UserLogged userLogged = new UserLogged(addedUser.getEmail(),addedUser.getUserName(),wSocket.payload);
 
-            // Intent intent = new Intent(this, MenuActivity.class);
-            //  startActivity(intent);
+                            text.setText(getString(R.string.register_success) + getString(R.string.logged));
+                            toast.show();
+                            Intent intent = new Intent(this, MenuActivity.class);
+                            startActivity(intent);
+
+                        } else if (wSocket.status.equals("409")) {
+                            text.setText("Użytkownik z takim emailem już istnieje");
+                            toast.show();
+                        }
+                    } catch (InterruptedException inex) {
+                    }
+                }
+
 
         } catch (Exception e) {
             Log.e("Except", "Wyjatek", e);

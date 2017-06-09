@@ -8,12 +8,6 @@ import com.neovisionaries.ws.client.WebSocketFactory;
 
 import org.json.JSONObject;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -31,22 +25,26 @@ public class WSocket {
 
     public WebSocketFactory factory;
     public WebSocket ws;
-    public String action;
+    public String status;
     private ExecutorService es;
     public Future<WebSocket> future;
+
+    public JSONObject jsonMsg;
+    public String payload;
+    public Notifier notifier;
+
 
 
     private WSocket() throws Exception {
         factory = new WebSocketFactory().setConnectionTimeout(TIMEOUT);
         ws = factory.createSocket(SERVER);
-
-
+        notifier = Notifier.getNotifierInstance();
 
         ws.addListener(new WebSocketAdapter() {
             @Override
             public void onTextMessage(WebSocket websocket, String message) throws Exception {
                 Log.d("Odebrano", message);
-                JSONObject jsonMsg = new JSONObject(message);
+                jsonMsg = new JSONObject(message);
                 //JSONObject jsonMsgProcedure = jsonMsg.getJSONObject("procedure");
                 // String jsonScope = jsonMsgProcedure.getString("scope");
                 String messageStatus = jsonMsg.getString("status");
@@ -54,7 +52,12 @@ public class WSocket {
                 Log.d("msgStatus", messageStatus);
                 Log.d("msgPayload", messagePayload);
 
-                action = messageStatus;
+                status = messageStatus;
+                payload=messagePayload;
+                synchronized(notifier) {
+                    notifier.notify();
+                }
+
             }
         });
         es = Executors.newSingleThreadExecutor();
@@ -78,6 +81,8 @@ public class WSocket {
 
         Log.d("Wiadomosc", "Wyslano: " + jsonString);
     }
+
+
 
     public void disconnect() {
         ws.disconnect();
