@@ -113,53 +113,55 @@ public class RegisterActivity extends AppCompatActivity {
         UserAdd addedUser = new UserAdd(email.getText().toString(), password.getText().toString(), username.getText().toString());
         //region WebSocket
         press++;
-        try {
+        try
+        {
             WSocket wSocket = WSocket.getwSocketInstance();
             wSocket.sendData(addedUser.JSONStrigify().toString());
-            //Log.d("Wiadomosc", "Wyslano jstringa");
             if (press > 1)
-
-                synchronized (wSocket.notifier) {
-                    try {
+                synchronized (wSocket.notifier)
+                {
+                    try
+                    {
                         wSocket.notifier.wait();
                         Log.d("wSocket status", wSocket.status);
-                        if (wSocket.status.equals("200") ) {
+                        if (wSocket.status.equals("200"))
+                        {
                             String token = wSocket.payload;
                             wSocket.sendData(LoggedUserInfo(token).toString());
-
-                            synchronized (wSocket.notifier) {
-                                try {
+    
+                            synchronized (wSocket.notifier)
+                            {
+                                try
+                                {
                                     wSocket.notifier.wait();
-
+    
                                     JSONObject payload = wSocket.jsonMsg.getJSONObject("payload");
 
                                     UserLogged userLogged = UserLogged.setUserLoggedInstance(payload.getString("email"), payload.getString("username"), token, payload.getString("id"));
-
+                                    
                                     text.setText(getString(R.string.register_success) + getString(R.string.logged));
                                     toast.show();
-                                } catch (InterruptedException inexe) {
+                                    Intent intent = new Intent(this, MenuActivity.class);
+                                    startActivity(intent);
                                 }
+                                catch (InterruptedException inexe) {}
                             }
-                            Intent intent = new Intent(this, MenuActivity.class);
-                            startActivity(intent);
-
-                        } else if (wSocket.status.equals("409")) {
-                            text.setText("Użytkownik z takim emailem już istnieje");
+    
+                        } else if (wSocket.status.equals("409"))
+                        {
+                            text.setText(getString(R.string.error_email_exist));
                             toast.show();
                         }
-                    } catch (InterruptedException inex) {
+                    } catch (InterruptedException inex)
+                    {
                     }
                 }
-
-
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             Log.e("Except", "Wyjatek", e);
             layout.setBackgroundColor(getResources().getColor(R.color.warningColor));
             text.setText(getString(R.string.register_error));
             toast.show();
-            // e.toString();
-            //  Log.d("Except", e.getMessage().toString());
-
         }
         //endregion
         //userPassword.setText((String[])addedUser);
