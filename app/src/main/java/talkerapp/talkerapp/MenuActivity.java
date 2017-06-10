@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import tomek.UserLogged;
+
 
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +25,8 @@ public class MenuActivity extends AppCompatActivity
     Button sendMsg;
     EditText editText;
     TextView txtView;
+    TextView txtViewUsername;
+    TextView txtViewEmail;
     Toolbar toolbar;
     DrawerLayout drawer;
     ActionBarDrawerToggle toggle;
@@ -44,6 +48,8 @@ public class MenuActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
     
         toggle.syncState();
+        txtViewUsername = (TextView)findViewById(R.id.textView_username);
+        txtViewEmail = (TextView)findViewById(R.id.textView_email);
       
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

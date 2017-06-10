@@ -27,7 +27,7 @@ private String email;
 
     public JSONObject JSONStrigify() {
         String scope = "auth";
-        String method = "signup";
+        String method = "signin";
 
         JSONObject procedureObject = new JSONObject();
         JSONObject headerObject = new JSONObject();
