@@ -33,7 +33,7 @@ public class UserLogged extends User implements JSONStringer {
         super(email, userName);
         this.token = token;
         this.id = id;
-        this.avatarid=avatarid;
+
     }
 
 

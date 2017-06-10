@@ -110,6 +110,7 @@ public class AccoutActivity extends Activity {
                 }
         } catch (Exception ex) {
         }
+
         incorrectLogin.setVisibility(View.INVISIBLE);
         if (login.getText().toString().equals("test") && password.getText().toString().equals("test")) {
             Intent intent = new Intent(this, MenuActivity.class);
