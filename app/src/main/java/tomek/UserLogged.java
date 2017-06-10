@@ -17,9 +17,9 @@ public class UserLogged extends User implements JSONStringer {
 
 
 
-    public static UserLogged setUserLoggedInstance(String email, String userName, String token, String id, String avatarid) {
+    public static UserLogged setUserLoggedInstance(String email, String userName, String token, String id) {
         if (userLoggedInstance == null)
-            userLoggedInstance = new UserLogged(email, userName, token, id, avatarid);
+            userLoggedInstance = new UserLogged(email, userName, token, id);
 
         return userLoggedInstance;
     }
@@ -29,7 +29,7 @@ public class UserLogged extends User implements JSONStringer {
         return userLoggedInstance;
     }
 
-    public UserLogged(String email, String userName, String token, String id, String avatarid) {
+    public UserLogged(String email, String userName, String token, String id) {
         super(email, userName);
         this.token = token;
         this.id = id;
