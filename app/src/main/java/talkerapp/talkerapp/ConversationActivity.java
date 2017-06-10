@@ -1,84 +1,100 @@
 package talkerapp.talkerapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import talkerapp.talkerapp.chat.ChatAdapter;
+import talkerapp.talkerapp.chat.ChatMessage;
 
 public class ConversationActivity extends AppCompatActivity
 {
-    private RecyclerView recyclerView;
-    private Button sendMsgButton;
-    private Toolbar toolbar;
-    private EditText msg;
+    private EditText messageET;
+    private ListView messagesContainer;
+    private ImageButton sendBtn;
+    private ChatAdapter adapter;
+    private ArrayList<ChatMessage> chatHistory;
     
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.conversation_screen);
-        Intent intent = getIntent();
-        toolbar = (Toolbar)findViewById(R.id.toolbarT);
-        setSupportActionBar(toolbar);
-        msg = (EditText)findViewById(R.id.edit_text_send_msg);
-        msg.addTextChangedListener(new TextWatcher()
-        {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after)
-            {
+        initControls();
+    }
+    
+    private void initControls() {
+        messagesContainer = (ListView) findViewById(R.id.messagesContainer);
+        messageET = (EditText) findViewById(R.id.messageEdit);
+        sendBtn = (ImageButton) findViewById(R.id.chatSendButton);
         
-            }
-    
+        RelativeLayout container = (RelativeLayout) findViewById(R.id.container);
+        loadDummyHistory();
+        
+        sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-                sendMsgButton.setEnabled(true);
-                sendMsgButton.setText("Działa");
-            }
-    
-            @Override
-            public void afterTextChanged(Editable s)
-            {
-                if (msg.getText().toString().equals(""))
-                {
-                    sendMsgButton.setEnabled(false);
+            public void onClick(View v) {
+                String messageText = messageET.getText().toString();
+                if (TextUtils.isEmpty(messageText)) {
+                    return;
                 }
+                
+                ChatMessage chatMessage = new ChatMessage();
+                chatMessage.setId(122);//dummy
+                chatMessage.setMessage(messageText);
+                chatMessage.setDate(DateFormat.getDateTimeInstance().format(new Date()));
+                chatMessage.setMe(true);
+                
+                messageET.setText("");
+                
+                displayMessage(chatMessage);
             }
         });
-        sendMsgButton = (Button)findViewById(R.id.button_send_msg);
-        sendMsgButton.setEnabled(false);
-        
-        recyclerView = (RecyclerView)findViewById(R.id.conversation_recyclerview);
-        
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                onBackPressed();
-            }
-        });
-        toolbar.setTitle(R.string.contacts_title);
     }
-
-    public void sendMsg(View view)
-    {
-        sendMsgButton.setText("Działa");
+    
+    public void displayMessage(ChatMessage message) {
+        adapter.add(message);
+        adapter.notifyDataSetChanged();
+        scroll();
     }
-
-    @Override
-    public void onBackPressed()
-    {
-        // Powraca do ekranu głównego
-        Intent intent = new Intent(this, MenuActivity.class);
-        startActivity(intent);
+    
+    private void scroll() {
+        messagesContainer.setSelection(messagesContainer.getCount() - 1);
+    }
+    
+    private void loadDummyHistory(){
+        
+        chatHistory = new ArrayList<ChatMessage>();
+        
+        ChatMessage msg = new ChatMessage();
+        msg.setId(1);
+        msg.setMe(false);
+        msg.setMessage("Hi");
+        msg.setDate(DateFormat.getDateTimeInstance().format(new Date()));
+        chatHistory.add(msg);
+        ChatMessage msg1 = new ChatMessage();
+        msg1.setId(2);
+        msg1.setMe(false);
+        msg1.setMessage("How r u doing???");
+        msg1.setDate(DateFormat.getDateTimeInstance().format(new Date()));
+        chatHistory.add(msg1);
+        
+        adapter = new ChatAdapter(ConversationActivity.this, new ArrayList<ChatMessage>());
+        messagesContainer.setAdapter(adapter);
+        
+        for(int i=0; i<chatHistory.size(); i++) {
+            ChatMessage message = chatHistory.get(i);
+            displayMessage(message);
+        }
     }
 }
