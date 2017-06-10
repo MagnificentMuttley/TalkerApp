@@ -95,6 +95,7 @@ public class AccoutActivity extends Activity {
 
                                     UserLogged userLogged = UserLogged.setUserLoggedInstance(payload.getString("email"), payload.getString("username"), token, payload.getString("id"));
 
+                                    //tutaj zmiana intentu
                                 } catch (InterruptedException inexe) {
                                 }
                             }
