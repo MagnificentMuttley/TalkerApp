@@ -92,8 +92,8 @@ public class AccoutActivity extends Activity {
                                     wSocket.notifier.wait();
 
                                     JSONObject payload = wSocket.jsonMsg.getJSONObject("payload");
-
-                                    UserLogged userLogged = UserLogged.setUserLoggedInstance(payload.getString("email"), payload.getString("username"), token, payload.getString("id"), payload.getString("avatarID"));
+    
+                                    UserLogged userLogged = UserLogged.setUserLoggedInstance(payload.getString("email"), payload.getString("username"), token, payload.getString("id"));
 
                                 } catch (InterruptedException inexe) {
                                 }

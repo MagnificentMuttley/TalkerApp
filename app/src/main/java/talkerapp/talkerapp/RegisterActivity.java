@@ -132,8 +132,8 @@ public class RegisterActivity extends AppCompatActivity {
                                     wSocket.notifier.wait();
 
                                     JSONObject payload = wSocket.jsonMsg.getJSONObject("payload");
-
-                                    UserLogged userLogged = UserLogged.setUserLoggedInstance(payload.getString("email"), payload.getString("username"), token, payload.getString("id"), payload.getString("avatarID"));
+    
+                                    UserLogged userLogged = UserLogged.setUserLoggedInstance(payload.getString("email"), payload.getString("username"), token, payload.getString("id"));
 
                                     text.setText(getString(R.string.register_success) + getString(R.string.logged));
                                     toast.show();
