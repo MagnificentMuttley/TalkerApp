@@ -61,9 +61,8 @@ public class MenuActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
+        
     }
 
     @Override
@@ -97,35 +96,30 @@ public class MenuActivity extends AppCompatActivity
         if (id == R.id.nav_profile)
         {
             Intent intent = new Intent(this, ProfileViewActivity.class);
-            item.setChecked(false);
             startActivity(intent);
     
         }
         else if (id == R.id.nav_friends)
         {
             Intent intent = new Intent(this, FriendsListActivity.class);
-            item.setChecked(false);
             startActivity(intent);
     
         }
         else if (id == R.id.nav_friends_search)
         {
             Intent intent = new Intent(this, SearchFriendsActivity.class);
-            item.setChecked(false);
             startActivity(intent);
     
         }
         else if (id == R.id.nav_settings)
         {
             Intent intent = new Intent(this, SettingsActivity.class);
-            item.setChecked(false);
             startActivity(intent);
     
         }
         else if (id == R.id.nav_logout)
         {
             Intent intent = new Intent(this, AccoutActivity.class);
-            item.setChecked(false);
             startActivity(intent);
     
         }
