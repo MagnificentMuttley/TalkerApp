@@ -3,36 +3,63 @@ package talkerapp.talkerapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import talkerapp.talkerapp.userList.AddButton;
+import talkerapp.talkerapp.userList.UserListAdapter;
 import tomek.UserLogged;
 import tomek.UserRegistered;
 import tomek.WSocket;
 
 public class SearchFriendsActivity extends AppCompatActivity
 {
-    private RecyclerView recyclerView;
-    private LinearLayoutManager mLinearLayoutManager;
-    Toolbar toolbar;
+    private ArrayList<AddButton> buttons;
+    private ListView usersContainer;
+    private UserListAdapter adapter;
+    private ArrayList<UserRegistered> list;
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_screen);
+        setContentView(R.layout.search_friends_screen);
         Intent intent = getIntent();
+        
+        initControls();
+
+        getRegisteredUsers();
+        for(int i=0; i<list.size(); i++)
+        {
+            UserRegistered user = list.get(i);
+            AddButton button = buttons.get(i);
+            displayMessage(user, button);
+        }
+    }
+    
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        list.clear();
+        buttons.clear();
+    }
+    
+    private void initControls() {
         toolbar = (Toolbar)findViewById(R.id.toolbarT);
         setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.friends_search);
-        recyclerView = (RecyclerView)findViewById(R.id.search_friends_recyclerview);
+        
+        buttons = new ArrayList<AddButton>();
+        list = new ArrayList<UserRegistered>();
+        adapter = new UserListAdapter(SearchFriendsActivity.this, new ArrayList<UserRegistered>(), new ArrayList<AddButton>());
         
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -44,14 +71,22 @@ public class SearchFriendsActivity extends AppCompatActivity
                 onBackPressed();
             }
         });
+        
+        usersContainer = (ListView) findViewById(R.id.usersContainer);
+        RelativeLayout container = (RelativeLayout) findViewById(R.id.container);
+        
+        usersContainer.setAdapter(adapter);
     }
     
-    protected void TUTAJFUNKCJA()
+    public void displayMessage(UserRegistered user, AddButton button) {
+        adapter.add(user, button);
+        adapter.notifyDataSetChanged();
+    }
+    
+    protected void getRegisteredUsers()
     {
         WSocket wSocket = WSocket.getwSocketInstance();
         wSocket.sendData(UserRegistered.getAllUsers(UserLogged.getUserLoggedInstance().getToken()).toString());
-        
-        List<UserRegistered> registeredUsers = new ArrayList<UserRegistered>();
         
         synchronized (wSocket.notifier) {
             try {
@@ -63,7 +98,8 @@ public class SearchFriendsActivity extends AppCompatActivity
                     UserRegistered registered = new UserRegistered(userRegistered.getString("username"),
                             userRegistered.getString("email"),
                             userRegistered.getString("id"));
-                    registeredUsers.add(registered);
+                    list.add(registered);
+                    buttons.add(new AddButton(this, Integer.parseInt(registered.getId())));
                 }
                 
             } catch (Exception exep) {

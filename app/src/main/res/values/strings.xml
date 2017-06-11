@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Talker</string>
 
+    <string name="add_user">Dodaj</string>
     <string name="incorrect_login">Niepoprawny email lub hasło</string>
     <string name="error_email_exist">Niepoprawny email lub hasło</string>
     <string name="empty_data">To pole nie może być puste</string>
