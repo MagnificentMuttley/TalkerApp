@@ -45,18 +45,18 @@ public class SearchFriendsActivity extends AppCompatActivity
             }
         });
     }
-
+    
     protected void TUTAJFUNKCJA()
     {
         WSocket wSocket = WSocket.getwSocketInstance();
         wSocket.sendData(UserRegistered.getAllUsers(UserLogged.getUserLoggedInstance().getToken()).toString());
-
+        
         List<UserRegistered> registeredUsers = new ArrayList<UserRegistered>();
-
+        
         synchronized (wSocket.notifier) {
             try {
                 wSocket.notifier.wait();
-
+                
                 JSONArray payload = wSocket.jsonMsg.getJSONArray("payload");
                 for (int i =0; i<payload.length();i++) {
                     JSONObject userRegistered = payload.getJSONObject(i);
@@ -65,7 +65,7 @@ public class SearchFriendsActivity extends AppCompatActivity
                             userRegistered.getString("id"));
                     registeredUsers.add(registered);
                 }
-
+                
             } catch (Exception exep) {
             }
         }
