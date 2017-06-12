@@ -135,7 +135,7 @@ public class ProfileViewActivity extends AppCompatActivity {
 
         synchronized (wSocket.notifier) {
             try {
-                wSocket.notifier.wait();
+                wSocket.notifier.wait(5000);
                 if (wSocket.status.equals("200")) {
                     //tost że zmieniono dane
                     JSONObject payload = wSocket.jsonMsg.getJSONObject("payload");

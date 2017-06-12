@@ -16,7 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 import tomek.UserLogged;
+import tomek.UserRegistered;
+import tomek.WSocket;
 
 
 public class MenuActivity extends AppCompatActivity
@@ -31,9 +38,9 @@ public class MenuActivity extends AppCompatActivity
     DrawerLayout drawer;
     ActionBarDrawerToggle toggle;
     NavigationView navigationView;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         Intent intent = getIntent();
@@ -46,10 +53,10 @@ public class MenuActivity extends AppCompatActivity
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-    
+
         toggle.syncState();
-        txtViewUsername = (TextView)findViewById(R.id.textView_username);
-        txtViewEmail = (TextView)findViewById(R.id.textView_email);
+        txtViewUsername = (TextView) findViewById(R.id.textView_username);
+        txtViewEmail = (TextView) findViewById(R.id.textView_email);
         txtViewUsername.setText(UserLogged.getUserLoggedInstance().getUserName());
         txtViewEmail.setText(UserLogged.getUserLoggedInstance().getEmail());
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -57,13 +64,12 @@ public class MenuActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
-        
+
     }
 
     @Override
@@ -94,38 +100,73 @@ public class MenuActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_profile)
-        {
+        if (id == R.id.nav_profile) {
             Intent intent = new Intent(this, ProfileViewActivity.class);
             startActivity(intent);
-    
-        }
-        else if (id == R.id.nav_friends)
-        {
+
+        } else if (id == R.id.nav_friends) {
             Intent intent = new Intent(this, FriendsListActivity.class);
             startActivity(intent);
-        }
-        else if (id == R.id.nav_invitation)
-        {
+        } else if (id == R.id.nav_invitation) {
             Intent intent = new Intent(this, InvitationActivity.class);
             startActivity(intent);
-        }
-        else if (id == R.id.nav_friends_search)
-        {
+        } else if (id == R.id.nav_friends_search) {
             Intent intent = new Intent(this, SearchFriendsActivity.class);
             startActivity(intent);
-    
+
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    public void newMessage(View view)
-    {
+    public void newMessage(View view) {
         // Przechodzi do ekranu tworzenia nowej wiadomości
         // Akcja na przycisk koperty
         Intent intent = new Intent(this, ConversationActivity.class);
         startActivity(intent);
+    }
+
+    protected void getMyChats() {
+        WSocket wSocket = WSocket.getwSocketInstance();
+        wSocket.sendData(UserLogged.getMyChats().toString());
+        synchronized (wSocket.notifier) {
+            try {
+                wSocket.notifier.wait();
+
+                JSONArray payload = wSocket.jsonMsg.getJSONArray("payload");
+                JSONArray members;
+
+
+                ArrayList<String> chatList = new ArrayList<String>();
+                ArrayList<String> memberList = new ArrayList<String>();
+                ArrayList<String> memberUsernames = new ArrayList<String>();
+                String memberID;
+                String chatID;
+                String memberUsername;
+
+                for (int i = 0; i < payload.length(); i++) {
+                    JSONObject chats = payload.getJSONObject(i);
+                    chatID = chats.getString("id");
+                    chatList.add(chatID);
+
+                    members = chats.getJSONArray("GroupChatMembers");
+                    for (int j = 0; j < chats.length(); j++) {
+                        JSONObject member = members.getJSONObject(j);
+                        if (!member.getString("id").equals(UserLogged.getUserLoggedInstance().getId())) {
+                            memberID = member.getString("id");
+                            memberList.add(memberID);
+                            memberUsername = member.getString("username");
+                            memberUsernames.add(memberUsername);
+                        }
+
+                    }
+                    //buttons.add(new MyButton(this, Integer.parseInt(registered.getId())));
+                }
+
+            } catch (Exception exep) {
+            }
+        }
+
     }
 }

@@ -70,6 +70,54 @@ public class UserLogged extends User implements JSONStringer {
 
     }
 
+    public static JSONObject getMyChats()
+    {String scope = "groupChat";
+        String method = "myChatRooms";
+
+        JSONObject procedureObject = new JSONObject();
+        JSONObject headerObject = new JSONObject();
+        JSONObject payloadObject = new JSONObject();
+        JSONObject finalObject = new JSONObject();
+
+        try {
+            headerObject.put("token", UserLogged.getUserLoggedInstance().token);
+            procedureObject.put("scope", scope);
+            procedureObject.put("method", method);
+
+            finalObject.put("procedure", procedureObject);
+            finalObject.put("meta", headerObject);
+            finalObject.put("payload", payloadObject);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return finalObject;}
+
+    public static JSONObject inviteToChat(String id, String token) {
+        String scope = "groupChat";
+        String method = "newChat";
+
+        JSONObject procedureObject = new JSONObject();
+        JSONObject headerObject = new JSONObject();
+        JSONObject payloadObject = new JSONObject();
+        JSONObject finalObject = new JSONObject();
+
+        try {
+            headerObject.put("token", token);
+            procedureObject.put("scope", scope);
+            procedureObject.put("method", method);
+            payloadObject.put("invitees", getUserLoggedInstance().getId());
+            payloadObject.put("invitees", id);
+            finalObject.put("procedure", procedureObject);
+            finalObject.put("meta", headerObject);
+            finalObject.put("payload", payloadObject);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return finalObject;
+    }
+
     public static JSONObject removeFriend(String id, String token) {
 
         String scope = "friendship";
@@ -192,8 +240,8 @@ public class UserLogged extends User implements JSONStringer {
     }
 
     public static JSONObject updateInfo(String id, String token, String username, String password, String email) {
-        String scope = "friendship";
-        String method = "getFriendsList";
+        String scope = "user";
+        String method = "update";
 
         JSONObject procedureObject = new JSONObject();
         JSONObject headerObject = new JSONObject();

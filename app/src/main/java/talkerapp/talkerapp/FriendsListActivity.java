@@ -114,6 +114,22 @@ public class FriendsListActivity extends AppCompatActivity {
 
     }
 
+    protected void inviteToChat()
+    {
+        WSocket wSocket=WSocket.getwSocketInstance();
+        // tutaj dodaj id
+        wSocket.sendData(UserLogged.inviteToChat(id, UserLogged.getUserLoggedInstance().getToken()));
+
+        synchronized (wSocket.notifier) {
+            try {
+                wSocket.notifier.wait(4000);
+
+            } catch (Exception exep) {
+            }
+//            getAllFriends();
+        }
+    }
+
     public static void removeFromFriends(int id)
     {
         boolean dodano = false;
