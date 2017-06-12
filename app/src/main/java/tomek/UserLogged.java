@@ -15,7 +15,7 @@ public class UserLogged extends User implements JSONStringer {
     private String id;
     private String avatarid;
     private static UserLogged userLoggedInstance = null;
-    private List<UserRegistered> friends;
+    private ArrayList<UserRegistered> friends;
 
 
 
@@ -42,9 +42,9 @@ public class UserLogged extends User implements JSONStringer {
 
 
 
-    public void setFriends(ArrayList<UserRegistered> friendList)
+    public static void setFriends(ArrayList<UserRegistered> friendList)
     {
-        friends=friendList;
+        userLoggedInstance.friends=friendList;
     }
 
     public static JSONObject addFriend(String id, String token)
@@ -152,6 +152,31 @@ public class UserLogged extends User implements JSONStringer {
     {
         String scope = "friendship";
         String method = "getFriendsList";
+
+        JSONObject procedureObject = new JSONObject();
+        JSONObject headerObject = new JSONObject();
+        JSONObject payloadObject = new JSONObject();
+        JSONObject finalObject = new JSONObject();
+
+        try {
+            headerObject.put("token", token);
+            procedureObject.put("scope", scope);
+            procedureObject.put("method", method);
+            finalObject.put("procedure", procedureObject);
+            finalObject.put("meta", headerObject);
+            finalObject.put("payload", payloadObject);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return finalObject;
+    }
+
+
+    public static JSONObject getFriendsRequests(String token)
+    {
+        String scope = "friendship";
+        String method = "getInvitesList";
 
         JSONObject procedureObject = new JSONObject();
         JSONObject headerObject = new JSONObject();
