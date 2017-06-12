@@ -41,10 +41,10 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/button_add_user"
+            android:id="@+id/button_chat"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/invite_user"
+            android:text="@string/talk"
             android:layout_gravity="end"
             android:background="@color/colorAccent"/>
     </LinearLayout>

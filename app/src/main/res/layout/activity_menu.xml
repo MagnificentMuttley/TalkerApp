@@ -12,7 +12,6 @@
         layout="@layout/app_bar_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
     <android.support.design.widget.NavigationView
         android:background="@color/colorPrimary"
         android:id="@+id/nav_view"
@@ -23,5 +22,7 @@
         app:headerLayout="@layout/nav_header_menu"
         app:itemTextColor="@color/textColorPrimary"
         app:itemIconTint="@color/colorAccent"
-        app:menu="@menu/activity_menu_drawer" />
+        app:menu="@menu/activity_menu_drawer" >
+    <include layout="@layout/nav_header_menu"/>
+</android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>

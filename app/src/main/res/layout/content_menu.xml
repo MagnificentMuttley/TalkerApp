@@ -5,4 +5,5 @@
     android:layout_height="match_parent"
     tools:context="talkerapp.talkerapp.MenuActivity"
     tools:showIn="@layout/app_bar_menu">
+
 </RelativeLayout>

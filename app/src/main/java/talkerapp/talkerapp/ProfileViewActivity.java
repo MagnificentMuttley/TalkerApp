@@ -14,6 +14,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import tomek.UserLogged;
 
 public class ProfileViewActivity extends AppCompatActivity
 {
@@ -21,6 +26,7 @@ public class ProfileViewActivity extends AppCompatActivity
     private Toolbar toolbar;
     private Button apply;
     private ImageView avatar;
+    private TextView txtViewUsername;
     private EditText username;
     private EditText email;
     private EditText password;
@@ -33,6 +39,7 @@ public class ProfileViewActivity extends AppCompatActivity
         Intent intent = getIntent();
         toolbar = (Toolbar)findViewById(R.id.toolbarT);
         avatar = (ImageView)findViewById(R.id.change_profile_avatar);
+        txtViewUsername = (TextView)findViewById(R.id.my_profile_username) ;
         avatar.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -45,6 +52,7 @@ public class ProfileViewActivity extends AppCompatActivity
             }
         });
         apply = (Button)findViewById(R.id.change_profile_button);
+        txtViewUsername.setText(UserLogged.getUserLoggedInstance().getUserName());
         apply.setEnabled(false);
         username = (EditText)findViewById(R.id.change_profile_usernameInput);
         username.addTextChangedListener(new TextWatcher()

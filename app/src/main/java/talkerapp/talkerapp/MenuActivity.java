@@ -50,7 +50,8 @@ public class MenuActivity extends AppCompatActivity
         toggle.syncState();
         txtViewUsername = (TextView)findViewById(R.id.textView_username);
         txtViewEmail = (TextView)findViewById(R.id.textView_email);
-      
+        txtViewUsername.setText(UserLogged.getUserLoggedInstance().getUserName());
+        txtViewEmail.setText(UserLogged.getUserLoggedInstance().getEmail());
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
