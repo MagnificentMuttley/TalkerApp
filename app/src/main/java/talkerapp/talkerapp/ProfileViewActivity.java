@@ -52,28 +52,44 @@ public class ProfileViewActivity extends AppCompatActivity {
         });
         apply = (Button) findViewById(R.id.change_profile_button);
         txtViewUsername.setText(UserLogged.getUserLoggedInstance().getUserName());
-        apply.setEnabled(false);
-        username = (EditText) findViewById(R.id.change_profile_usernameInput);
-        username.addTextChangedListener(new TextWatcher() {
-            String tmp;
-
+        apply.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                tmp = username.getText().toString();
-            }
+            public void onClick(View v)
+            {
+                if (username.getText().toString().equals(""))
+                    username.setError(getResources().getString(R.string.empty_data));
+                else
+                    username.setError(null);
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (email.getText().toString().equals(""))
+                    email.setError(getResources().getString(R.string.empty_data));
+                else
+                    email.setError(null);
 
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!tmp.equals(username.getText().toString())) {
-                    apply.setEnabled(true);
+                if (password.getText().toString().equals(passwordConfirm.getText().toString())
+                        && !password.getText().toString().equals("")
+                        && !passwordConfirm.getText().toString().equals("")) {
+                    password.setError(null);
+                    passwordConfirm.setError(null);
+                } else {
+                    if (password.getText().toString().equals(""))
+                        password.setError(getResources().getString(R.string.empty_data));
+                    else
+                        password.setError(getResources().getString(R.string.register_password_error));
+                    if (passwordConfirm.getText().toString().equals(""))
+                        passwordConfirm.setError(getResources().getString(R.string.empty_data));
+                    else
+                        passwordConfirm.setError(getResources().getString(R.string.register_password_error));
                 }
+                if (username.getError() == null
+                        && email.getError() == null
+                        && password.getError() == null
+                        && passwordConfirm.getError() == null)
+                    updateUserInfo();
             }
         });
+        username = (EditText) findViewById(R.id.change_profile_usernameInput);
         email = (EditText) findViewById(R.id.change_profile_emailInput);
         password = (EditText) findViewById(R.id.change_profile_passwordInput);
         passwordConfirm = (EditText) findViewById(R.id.change_profile_password_ConfirmInput);
@@ -110,13 +126,12 @@ public class ProfileViewActivity extends AppCompatActivity {
     }
 
     protected void updateUserInfo() {
-        // to mają być te pola tekstowe
-        String username, password, email;
+        String usernameTmp = username.getText().toString(), passwordTmp = password.getText().toString(), emailTmp = email.getText().toString();
 
         WSocket wSocket = WSocket.getwSocketInstance();
         wSocket.sendData(UserLogged.updateInfo(UserLogged.getUserLoggedInstance().getId(),
                 UserLogged.getUserLoggedInstance().getToken(),
-                username, password, email).toString());
+                usernameTmp, passwordTmp, emailTmp).toString());
 
         synchronized (wSocket.notifier) {
             try {
@@ -124,7 +139,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                 if (wSocket.status.equals("200")) {
                     //tost że zmieniono dane
                     JSONObject payload = wSocket.jsonMsg.getJSONObject("payload");
-                    UserLogged userLogged = UserLogged.setUserLoggedInstance(payload.getString("email"), payload.getString("username"), token, payload.getString("id"));
+                    UserLogged userLogged = UserLogged.setUserLoggedInstance(payload.getString("email"), payload.getString("username"), UserLogged.getUserLoggedInstance().getToken(), payload.getString("id"));
                 }
 
             } catch (Exception ex) {
