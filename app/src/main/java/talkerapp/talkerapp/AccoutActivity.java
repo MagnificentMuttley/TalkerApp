@@ -42,14 +42,14 @@ public class AccoutActivity extends Activity {
         Intent intent = getIntent();
         setContentView(R.layout.accout_login);
 
+
         fileName = "loginData";
         incorrectLogin = (TextView) findViewById(R.id.incorrectLogin);
         login = (EditText) findViewById(R.id.login_email_input);
         password = (EditText) findViewById(R.id.login_password_input);
         incorrectLogin.setVisibility(View.INVISIBLE);
         logButton = (Button) findViewById(R.id.loginButton);
-        try
-        {
+        try {
             String msg;
             FileInputStream fileInputStream = openFileInput(fileName);
             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
@@ -62,64 +62,62 @@ public class AccoutActivity extends Activity {
             }
             login.setText(stringBuffer);
             password.setText(stringBuffer2);
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     int press = 0;
 
-    public void logIn(View view) throws FileNotFoundException
-    {
+    public void logIn(View view) throws FileNotFoundException {
         UserToLogin userToLogin = new UserToLogin(login.getText().toString(), password.getText().toString());
-        try
-        {
+        try {
             WSocket wSocket = WSocket.getwSocketInstance();
             wSocket.sendData(userToLogin.JSONStrigify().toString());
             press++;
             if (press > 1)
 
-                synchronized (wSocket.notifier)
-                {
-                    try
-                    {
+                synchronized (wSocket.notifier) {
+                    try {
                         wSocket.notifier.wait();
                         Log.d("wSocket status", wSocket.status);
                         if (wSocket.status.equals("200")) {
                             String token = wSocket.payload;
                             wSocket.sendData(LoggedUserInfo(token).toString());
 
-                            synchronized (wSocket.notifier)
-                            {
-                                try
-                                {
+                            synchronized (wSocket.notifier) {
+                                try {
                                     wSocket.notifier.wait();
 
                                     JSONObject payload = wSocket.jsonMsg.getJSONObject("payload");
-    
+
                                     UserLogged userLogged = UserLogged.setUserLoggedInstance(payload.getString("email"), payload.getString("username"), token, payload.getString("id"));
-    
-                                    Intent intent = new Intent(this, MenuActivity.class);
-                                    startActivity(intent);
+
+                                    //tutaj zmiana intentu
+                                } catch (InterruptedException inexe) {
                                 }
-                                catch (InterruptedException inexe) {}
                             }
+
+
+                        } else if (wSocket.status.equals("409")) {
+                            //text.setText("Użytkownik z takim emailem już istnieje");
+                            //toast.show();
                         }
-                        else if (wSocket.status.equals("409")) {}
+                    } catch (InterruptedException inex) {
                     }
-                    catch (InterruptedException inex) {}
                 }
+        } catch (Exception ex) {
         }
-        catch (Exception ex)
-        {
+
+        incorrectLogin.setVisibility(View.INVISIBLE);
+        if (login.getText().toString().equals("test") && password.getText().toString().equals("test")) {
+            Intent intent = new Intent(this, MenuActivity.class);
+            startActivity(intent);
+        } else {
+            incorrectLogin.setVisibility(View.VISIBLE);
         }
-//
     }
 
     public void register(View view) {
