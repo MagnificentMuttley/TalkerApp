@@ -103,7 +103,11 @@ public class MenuActivity extends AppCompatActivity
         {
             Intent intent = new Intent(this, FriendsListActivity.class);
             startActivity(intent);
-    
+        }
+        else if (id == R.id.nav_invitation)
+        {
+            Intent intent = new Intent(this, InvitationActivity.class);
+            startActivity(intent);
         }
         else if (id == R.id.nav_friends_search)
         {

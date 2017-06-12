@@ -18,16 +18,17 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import talkerapp.talkerapp.MyButton;
 import talkerapp.talkerapp.R;
 import tomek.UserRegistered;
 
 public class UserListAdapter extends BaseAdapter
 {
     private final List<UserRegistered> usersRegistered;
-    private final List<AddButton> buttons;
+    private final List<MyButton> buttons;
     private Activity context;
     
-    public UserListAdapter(Activity context, List<UserRegistered> chatMessages, List<AddButton> buttons) {
+    public UserListAdapter(Activity context, List<UserRegistered> chatMessages, List<MyButton> buttons) {
         this.context = context;
         this.usersRegistered = chatMessages;
         this.buttons = buttons;
@@ -54,7 +55,7 @@ public class UserListAdapter extends BaseAdapter
         }
     }
     
-    public AddButton getItemButton(int position)
+    public MyButton getItemButton(int position)
     {
         if (buttons != null) {
             return buttons.get(position);
@@ -75,11 +76,11 @@ public class UserListAdapter extends BaseAdapter
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         UserRegistered user = getItem(position);
-        AddButton btnId = getItemButton(position);
+        MyButton btnId = getItemButton(position);
         LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         
         if (convertView == null) {
-            convertView = vi.inflate(R.layout.list_item_registered_users, null);
+            convertView = vi.inflate(R.layout.list_item_registered_user, null);
             holder = createViewHolder(convertView);
             convertView.setTag(holder);
         } else {
@@ -88,18 +89,18 @@ public class UserListAdapter extends BaseAdapter
         
         holder.txtMessage.setText(user.getEmail());
         holder.txtInfo.setText(user.getUsername());
-        holder.btn.setText(R.string.add_user);
+        holder.btn.setText(R.string.invite_user);
         
         return convertView;
     }
     
-    public void add(UserRegistered message, AddButton button)
+    public void add(UserRegistered message, MyButton button)
     {
         usersRegistered.add(message);
         buttons.add(button);
     }
     
-    public void add(List<UserRegistered> messages, List<AddButton> button)
+    public void add(List<UserRegistered> messages, List<MyButton> button)
     {
         usersRegistered.addAll(messages);
         buttons.addAll(button);

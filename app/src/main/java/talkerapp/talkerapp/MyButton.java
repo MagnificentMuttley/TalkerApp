@@ -1,16 +1,15 @@
-package talkerapp.talkerapp.userList;
+package talkerapp.talkerapp;
 
 import android.content.Context;
-import android.widget.Button;
 
 /**
  * Created by Adrian on 11.06.2017.
  */
 
-public class AddButton extends android.support.v7.widget.AppCompatButton
+public class MyButton extends android.support.v7.widget.AppCompatButton
 {
     private int id;
-    public AddButton(Context context, int id)
+    public MyButton(Context context, int id)
     {
         super(context);
         this.id = id;

@@ -13,25 +13,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import talkerapp.talkerapp.userList.AddButton;
 import talkerapp.talkerapp.userList.UserListAdapter;
 import tomek.UserLogged;
 import tomek.UserRegistered;
 import tomek.WSocket;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.List;
-
-import tomek.UserLogged;
-import tomek.UserRegistered;
-import tomek.WSocket;
 
 public class SearchFriendsActivity extends AppCompatActivity
 {
-    private ArrayList<AddButton> buttons;
+    private ArrayList<MyButton> buttons;
     private ListView usersContainer;
     private UserListAdapter adapter;
     private ArrayList<UserRegistered> list;
@@ -49,7 +40,7 @@ public class SearchFriendsActivity extends AppCompatActivity
         for(int i=0; i<list.size(); i++)
         {
             UserRegistered user = list.get(i);
-            AddButton button = buttons.get(i);
+            MyButton button = buttons.get(i);
             displayMessage(user, button);
         }
     }
@@ -67,9 +58,9 @@ public class SearchFriendsActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.friends_search);
         
-        buttons = new ArrayList<AddButton>();
+        buttons = new ArrayList<MyButton>();
         list = new ArrayList<UserRegistered>();
-        adapter = new UserListAdapter(SearchFriendsActivity.this, new ArrayList<UserRegistered>(), new ArrayList<AddButton>());
+        adapter = new UserListAdapter(SearchFriendsActivity.this, new ArrayList<UserRegistered>(), new ArrayList<MyButton>());
         
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -88,7 +79,7 @@ public class SearchFriendsActivity extends AppCompatActivity
         usersContainer.setAdapter(adapter);
     }
     
-    public void displayMessage(UserRegistered user, AddButton button) {
+    public void displayMessage(UserRegistered user, MyButton button) {
         adapter.add(user, button);
         adapter.notifyDataSetChanged();
     }
@@ -109,7 +100,7 @@ public class SearchFriendsActivity extends AppCompatActivity
                             userRegistered.getString("email"),
                             userRegistered.getString("id"));
                     list.add(registered);
-                    buttons.add(new AddButton(this, Integer.parseInt(registered.getId())));
+                    buttons.add(new MyButton(this, Integer.parseInt(registered.getId())));
                 }
                 
             } catch (Exception exep) {
