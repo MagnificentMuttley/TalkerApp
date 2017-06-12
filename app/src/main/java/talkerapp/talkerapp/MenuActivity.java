@@ -116,18 +116,6 @@ public class MenuActivity extends AppCompatActivity
             startActivity(intent);
     
         }
-        else if (id == R.id.nav_settings)
-        {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-    
-        }
-        else if (id == R.id.nav_logout)
-        {
-            Intent intent = new Intent(this, AccoutActivity.class);
-            startActivity(intent);
-    
-        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

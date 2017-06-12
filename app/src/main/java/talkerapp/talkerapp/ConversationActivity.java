@@ -2,6 +2,7 @@ package talkerapp.talkerapp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import talkerapp.talkerapp.chat.ChatMessage;
 
 public class ConversationActivity extends AppCompatActivity
 {
+    private Toolbar toolbar;
     private EditText messageET;
     private ListView messagesContainer;
     private ImageButton sendBtn;
@@ -32,10 +34,22 @@ public class ConversationActivity extends AppCompatActivity
     }
     
     private void initControls() {
+        toolbar = (Toolbar)findViewById(R.id.toolbarT);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle(R.string.username_placeholder);
         messagesContainer = (ListView) findViewById(R.id.messagesContainer);
         messageET = (EditText) findViewById(R.id.messageEdit);
         sendBtn = (ImageButton) findViewById(R.id.chatSendButton);
-        
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                onBackPressed();
+            }
+        });
         RelativeLayout container = (RelativeLayout) findViewById(R.id.container);
         loadDummyHistory();
         
