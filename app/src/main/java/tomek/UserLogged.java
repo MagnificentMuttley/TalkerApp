@@ -17,8 +17,9 @@ public class UserLogged extends User implements JSONStringer {
     private static UserLogged userLoggedInstance = null;
     private ArrayList<UserRegistered> friends;
 
-
-
+    public String getId() {
+        return id;
+    }
 
     public static UserLogged setUserLoggedInstance(String email, String userName, String token, String id) {
         if (userLoggedInstance == null)
@@ -27,8 +28,7 @@ public class UserLogged extends User implements JSONStringer {
         return userLoggedInstance;
     }
 
-    public static UserLogged getUserLoggedInstance()
-    {
+    public static UserLogged getUserLoggedInstance() {
         return userLoggedInstance;
     }
 
@@ -41,14 +41,11 @@ public class UserLogged extends User implements JSONStringer {
     }
 
 
-
-    public static void setFriends(ArrayList<UserRegistered> friendList)
-    {
-        userLoggedInstance.friends=friendList;
+    public static void setFriends(ArrayList<UserRegistered> friendList) {
+        userLoggedInstance.friends = friendList;
     }
 
-    public static JSONObject addFriend(String id, String token)
-    {
+    public static JSONObject addFriend(String id, String token) {
         String scope = "friendship";
         String method = "inviteFriend";
 
@@ -73,8 +70,7 @@ public class UserLogged extends User implements JSONStringer {
 
     }
 
-    public static JSONObject removeFriend(String id, String token)
-    {
+    public static JSONObject removeFriend(String id, String token) {
 
         String scope = "friendship";
         String method = "removeFriend";
@@ -98,8 +94,8 @@ public class UserLogged extends User implements JSONStringer {
         }
         return finalObject;
     }
-    public static JSONObject rejectFriend(String id, String token)
-    {
+
+    public static JSONObject rejectFriend(String id, String token) {
 
         String scope = "friendship";
         String method = "rejectFriendshipInvite";
@@ -123,8 +119,8 @@ public class UserLogged extends User implements JSONStringer {
         }
         return finalObject;
     }
-    public static JSONObject acceptFriend(String id, String token)
-    {
+
+    public static JSONObject acceptFriend(String id, String token) {
         String scope = "friendship";
         String method = "acceptFriendshipInvite";
 
@@ -148,8 +144,7 @@ public class UserLogged extends User implements JSONStringer {
         return finalObject;
     }
 
-    public static JSONObject getFriends(String token)
-    {
+    public static JSONObject getFriends(String token) {
         String scope = "friendship";
         String method = "getFriendsList";
 
@@ -173,8 +168,7 @@ public class UserLogged extends User implements JSONStringer {
     }
 
 
-    public static JSONObject getFriendsRequests(String token)
-    {
+    public static JSONObject getFriendsRequests(String token) {
         String scope = "friendship";
         String method = "getInvitesList";
 
@@ -197,6 +191,38 @@ public class UserLogged extends User implements JSONStringer {
         return finalObject;
     }
 
+    public static JSONObject updateInfo(String id, String token, String username, String password, String email) {
+        String scope = "friendship";
+        String method = "getFriendsList";
+
+        JSONObject procedureObject = new JSONObject();
+        JSONObject headerObject = new JSONObject();
+        JSONObject payloadObject = new JSONObject();
+        JSONObject finalObject = new JSONObject();
+        JSONObject dataObject = new JSONObject();
+
+        try {
+            headerObject.put("token", token);
+
+            procedureObject.put("scope", scope);
+            procedureObject.put("method", method);
+
+            dataObject.put("username", username);
+            dataObject.put("password", password);
+            dataObject.put("email", email);
+
+            payloadObject.put("id", id);
+            payloadObject.put("data", dataObject);
+
+            finalObject.put("procedure", procedureObject);
+            finalObject.put("meta", headerObject);
+            finalObject.put("payload", payloadObject);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return finalObject;
+    }
 
     public static JSONObject LoggedUserInfo(String token) {
 
