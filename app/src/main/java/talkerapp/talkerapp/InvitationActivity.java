@@ -3,51 +3,90 @@ package talkerapp.talkerapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import talkerapp.talkerapp.invitationList.InvitationListAdapter;
+import talkerapp.talkerapp.userList.UserListAdapter;
 import tomek.UserLogged;
 import tomek.UserRegistered;
 import tomek.WSocket;
 
 public class InvitationActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
-    private LinearLayoutManager mLinearLayoutManager;
+    private ArrayList<MyButton> buttons;
+    private ArrayList<UserRegistered> friendsRequests;
+    private ListView invitationContainer;
+    private InvitationListAdapter adapter;
     Toolbar toolbar;
-
+    
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_screen);
+        setContentView(R.layout.invitation_screen);
         Intent intent = getIntent();
-        toolbar = (Toolbar) findViewById(R.id.toolbarT);
+        
+        initControls();
+    
+        getFriendsRequests();
+        for(int i = 0; i< friendsRequests.size(); i++)
+        {
+            UserRegistered user = friendsRequests.get(i);
+            MyButton button = buttons.get(i);
+            displayItem(user, button);
+        }
+    }
+    
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        friendsRequests.clear();
+        buttons.clear();
+    }
+    
+    private void initControls() {
+        toolbar = (Toolbar)findViewById(R.id.toolbarT);
         setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.invitation);
-
+        
+        buttons = new ArrayList<MyButton>();
+        friendsRequests = new ArrayList<UserRegistered>();
+        adapter = new InvitationListAdapter(InvitationActivity.this, new ArrayList<UserRegistered>(), new ArrayList<MyButton>());
+        
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 onBackPressed();
             }
         });
+    
+        invitationContainer = (ListView) findViewById(R.id.invitationContainer);
+        RelativeLayout container = (RelativeLayout) findViewById(R.id.container);
+    
+        invitationContainer.setAdapter(adapter);
     }
-
-    ArrayList<UserRegistered> friendsRequests = new ArrayList<UserRegistered>();
-
+    
+    public void displayItem(UserRegistered user, MyButton button) {
+        adapter.add(user, button);
+        adapter.notifyDataSetChanged();
+    }
+    
     protected void getFriendsRequests() {
         WSocket wSocket = WSocket.getwSocketInstance();
-        wSocket.sendData(UserLogged.getFriends(UserLogged.getUserLoggedInstance().getToken()).toString());
+        wSocket.sendData(UserLogged.getFriendsRequests(UserLogged.getUserLoggedInstance().getToken()).toString());
 
         synchronized (wSocket.notifier) {
             try {
@@ -60,9 +99,8 @@ public class InvitationActivity extends AppCompatActivity {
                             userRegistered.getString("email"),
                             userRegistered.getString("id"));
                     friendsRequests.add(registered);
-
-                    // friendsRequest to lista z kurwa tymi ludźi, dosć łątwo to zauważyc
-                    //buttons.add(new MyButton(this, Integer.parseInt(registered.getId())));
+                    Log.d("Zaproszenie: ", registered.getId());
+                    buttons.add(new MyButton(this, Integer.parseInt(registered.getId())));
                 }
 
 
@@ -71,10 +109,12 @@ public class InvitationActivity extends AppCompatActivity {
         }
     }
 
-    boolean dodano = false;
-    protected void taFunkcjaAkceptujeZajomego() {
+    public static void AcceptInvitation(int id)
+    {
+        boolean dodano = false;
+    
         WSocket wSocket = WSocket.getwSocketInstance();
-        // tutej id dopisz
+        
         wSocket.sendData(UserLogged.acceptFriend(Integer.toString(id), UserLogged.getUserLoggedInstance().getToken()).toString());
 
         synchronized (wSocket.notifier) {
@@ -88,10 +128,13 @@ public class InvitationActivity extends AppCompatActivity {
         }
     //tu możesz if(dodano) i tosta zrobić
     }
-    protected void taFunkcjaNieAkceptjeZajomego()
+    
+    public static void RejectInvitation(int id)
     {
+        boolean dodano = false;
+        
         WSocket wSocket = WSocket.getwSocketInstance();
-        // tutej id dopisz
+        
         wSocket.sendData(UserLogged.rejectFriend(Integer.toString(id), UserLogged.getUserLoggedInstance().getToken()).toString());
 
         synchronized (wSocket.notifier) {

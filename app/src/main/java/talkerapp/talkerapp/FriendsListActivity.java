@@ -6,8 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -16,35 +19,74 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import talkerapp.talkerapp.friendsList.FriendsListAdapter;
 import tomek.UserLogged;
 import tomek.UserRegistered;
 import tomek.WSocket;
 
 public class FriendsListActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
-    private LinearLayoutManager mLinearLayoutManager;
-    Toolbar toolbar;
-
+    private ArrayList<MyButton> buttons;
+    private ListView usersContainer;
+    private FriendsListAdapter adapter;
+    private ArrayList<UserRegistered> friends;
+    private Toolbar toolbar;
+    
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_screen);
+        setContentView(R.layout.friends_list_screen);
         Intent intent = getIntent();
-        toolbar = (Toolbar) findViewById(R.id.toolbarT);
+        
+        initControls();
+        
+        getAllFriends();
+        for(int i = 0; i < friends.size(); i++)
+        {
+            UserRegistered user = friends.get(i);
+            MyButton button = buttons.get(i);
+            displayItem(user, button);
+        }
+    }
+    
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        friends.clear();
+        buttons.clear();
+    }
+    
+    private void initControls() {
+        toolbar = (Toolbar)findViewById(R.id.toolbarT);
         setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.my_friends);
-
+        
+        buttons = new ArrayList<MyButton>();
+        friends = new ArrayList<UserRegistered>();
+        adapter = new FriendsListAdapter(FriendsListActivity.this, new ArrayList<UserRegistered>(), new ArrayList<MyButton>());
+        
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 onBackPressed();
             }
         });
+        
+        usersContainer = (ListView) findViewById(R.id.friendsContainer);
+        RelativeLayout container = (RelativeLayout) findViewById(R.id.container);
+        
+        usersContainer.setAdapter(adapter);
     }
-
-    ArrayList<UserRegistered> friends = new ArrayList<UserRegistered>();
+    
+    public void displayItem(UserRegistered user, MyButton button) {
+        adapter.add(user, button);
+        adapter.notifyDataSetChanged();
+    }
 
     protected void getAllFriends() {
         WSocket wSocket = WSocket.getwSocketInstance();
@@ -61,9 +103,8 @@ public class FriendsListActivity extends AppCompatActivity {
                             userRegistered.getString("email"),
                             userRegistered.getString("id"));
                     friends.add(registered);
-
-                    // friends to lista z kurwa tymi ludźi, dosć łątwo to zauważyc
-                    // buttons.add(new MyButton(this, Integer.parseInt(registered.getId())));
+                    Log.d("Friend: ", registered.getUsername());
+                    buttons.add(new MyButton(this, Integer.parseInt(registered.getId())));
                 }
                 UserLogged.setFriends(friends);
 
@@ -73,9 +114,8 @@ public class FriendsListActivity extends AppCompatActivity {
 
     }
 
-    protected void removeFromFriends()
+    public static void removeFromFriends(int id)
     {
-
         boolean dodano = false;
         WSocket wSocket = WSocket.getwSocketInstance();
         wSocket.sendData(UserLogged.removeFriend(Integer.toString(id), UserLogged.getUserLoggedInstance().getToken()).toString());
@@ -88,7 +128,7 @@ public class FriendsListActivity extends AppCompatActivity {
 
             } catch (Exception exep) {
             }
-            getAllFriends();
+//            getAllFriends();
         }
     }
 }

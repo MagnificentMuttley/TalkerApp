@@ -80,7 +80,7 @@ public class FriendsListAdapter extends BaseAdapter
         LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         
         if (convertView == null) {
-            convertView = vi.inflate(R.layout.list_item_registered_user, null);
+            convertView = vi.inflate(R.layout.list_item_friend, null);
             holder = createViewHolder(convertView);
             convertView.setTag(holder);
         } else {
@@ -89,7 +89,7 @@ public class FriendsListAdapter extends BaseAdapter
         
         holder.txtMessage.setText(user.getEmail());
         holder.txtInfo.setText(user.getUsername());
-        holder.btn.setText(R.string.invite_user);
+//        holder.btn.setText(R.string.invite_user);
         
         return convertView;
     }
@@ -123,9 +123,9 @@ public class FriendsListAdapter extends BaseAdapter
         layoutParams.gravity = Gravity.RIGHT;
         holder.txtMessage.setLayoutParams(layoutParams);
         
-        layoutParams = (LinearLayout.LayoutParams) holder.btn.getLayoutParams();
-        layoutParams.gravity = Gravity.RIGHT;
-        holder.btn.setLayoutParams(layoutParams);
+//        layoutParams = (LinearLayout.LayoutParams) holder.btn.getLayoutParams();
+//        layoutParams.gravity = Gravity.RIGHT;
+//        holder.btn.setLayoutParams(layoutParams);
         
         layoutParams = (LinearLayout.LayoutParams) holder.txtInfo.getLayoutParams();
         layoutParams.gravity = Gravity.RIGHT;
@@ -135,7 +135,7 @@ public class FriendsListAdapter extends BaseAdapter
     private ViewHolder createViewHolder(View v) {
         ViewHolder holder = new ViewHolder();
         holder.txtMessage = (TextView) v.findViewById(R.id.txtMessage);
-        holder.btn = (Button) v.findViewById(R.id.button_add_user);
+//        holder.btn = (Button) v.findViewById(R.id.button_add_user);
         holder.content = (LinearLayout) v.findViewById(R.id.content);
         holder.contentWithBG = (LinearLayout) v.findViewById(R.id.contentWithBackground);
         holder.txtInfo = (TextView) v.findViewById(R.id.txtInfo);
@@ -143,7 +143,7 @@ public class FriendsListAdapter extends BaseAdapter
     }
     
     private static class ViewHolder {
-        public Button btn;
+//        public Button btn;
         public TextView txtMessage;
         public TextView txtInfo;
         public LinearLayout content;

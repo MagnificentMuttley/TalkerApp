@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import talkerapp.talkerapp.InvitationActivity;
 import talkerapp.talkerapp.MyButton;
 import talkerapp.talkerapp.R;
 import tomek.UserRegistered;
@@ -76,11 +77,11 @@ public class InvitationListAdapter extends BaseAdapter
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         UserRegistered user = getItem(position);
-        MyButton btnId = getItemButton(position);
+        final MyButton btnId = getItemButton(position);
         LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         
         if (convertView == null) {
-            convertView = vi.inflate(R.layout.list_item_registered_user, null);
+            convertView = vi.inflate(R.layout.list_item_invitation, null);
             holder = createViewHolder(convertView);
             convertView.setTag(holder);
         } else {
@@ -89,7 +90,24 @@ public class InvitationListAdapter extends BaseAdapter
         
         holder.txtMessage.setText(user.getEmail());
         holder.txtInfo.setText(user.getUsername());
-        holder.btn.setText(R.string.invite_user);
+        holder.btn.setText(R.string.accept_invitation);
+        holder.btn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                InvitationActivity.AcceptInvitation(btnId.getId());
+            }
+        });
+        holder.btn2.setText(R.string.reject_invitation);
+        holder.btn2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                InvitationActivity.RejectInvitation(btnId.getId());
+            }
+        });
         
         return convertView;
     }
@@ -126,7 +144,11 @@ public class InvitationListAdapter extends BaseAdapter
         layoutParams = (LinearLayout.LayoutParams) holder.btn.getLayoutParams();
         layoutParams.gravity = Gravity.RIGHT;
         holder.btn.setLayoutParams(layoutParams);
-        
+    
+        layoutParams = (LinearLayout.LayoutParams) holder.btn2.getLayoutParams();
+        layoutParams.gravity = Gravity.RIGHT;
+        holder.btn2.setLayoutParams(layoutParams);
+            
         layoutParams = (LinearLayout.LayoutParams) holder.txtInfo.getLayoutParams();
         layoutParams.gravity = Gravity.RIGHT;
         holder.txtInfo.setLayoutParams(layoutParams);
@@ -135,7 +157,8 @@ public class InvitationListAdapter extends BaseAdapter
     private ViewHolder createViewHolder(View v) {
         ViewHolder holder = new ViewHolder();
         holder.txtMessage = (TextView) v.findViewById(R.id.txtMessage);
-        holder.btn = (Button) v.findViewById(R.id.button_add_user);
+        holder.btn = (Button) v.findViewById(R.id.button_accept_friend);
+        holder.btn2 = (Button) v.findViewById(R.id.button_reject_friend);
         holder.content = (LinearLayout) v.findViewById(R.id.content);
         holder.contentWithBG = (LinearLayout) v.findViewById(R.id.contentWithBackground);
         holder.txtInfo = (TextView) v.findViewById(R.id.txtInfo);
@@ -144,6 +167,7 @@ public class InvitationListAdapter extends BaseAdapter
     
     private static class ViewHolder {
         public Button btn;
+        public Button btn2;
         public TextView txtMessage;
         public TextView txtInfo;
         public LinearLayout content;

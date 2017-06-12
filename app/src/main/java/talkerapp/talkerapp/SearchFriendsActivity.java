@@ -23,11 +23,11 @@ import tomek.WSocket;
 public class SearchFriendsActivity extends AppCompatActivity
 {
     private ArrayList<MyButton> buttons;
-    private MyButton btn;
     private ListView usersContainer;
     private UserListAdapter adapter;
     private ArrayList<UserRegistered> registeredUsers;
     private Toolbar toolbar;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
