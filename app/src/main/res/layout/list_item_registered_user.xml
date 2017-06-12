@@ -46,6 +46,7 @@
                 android:layout_height="match_parent"
                 android:text="@string/invite_user"
                 android:layout_gravity="end"
+                android:onClick="SendInvitation"
                 android:background="@color/colorAccent"/>
         </LinearLayout>
 </RelativeLayout>

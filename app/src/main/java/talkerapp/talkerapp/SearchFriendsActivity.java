@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -18,14 +20,13 @@ import tomek.UserLogged;
 import tomek.UserRegistered;
 import tomek.WSocket;
 
-import java.util.List;
-
 public class SearchFriendsActivity extends AppCompatActivity
 {
     private ArrayList<MyButton> buttons;
+    private MyButton btn;
     private ListView usersContainer;
     private UserListAdapter adapter;
-    private ArrayList<UserRegistered> list;
+    private ArrayList<UserRegistered> registeredUsers;
     private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,13 +36,14 @@ public class SearchFriendsActivity extends AppCompatActivity
         Intent intent = getIntent();
         
         initControls();
-
+        
         getRegisteredUsers();
-        for(int i=0; i<list.size(); i++)
+        for(int i = 0; i< registeredUsers.size(); i++)
         {
-            UserRegistered user = list.get(i);
+            UserRegistered user = registeredUsers.get(i);
             MyButton button = buttons.get(i);
-            displayMessage(user, button);
+            displayItem(user, button);
+            
         }
     }
     
@@ -49,7 +51,7 @@ public class SearchFriendsActivity extends AppCompatActivity
     protected void onDestroy()
     {
         super.onDestroy();
-        list.clear();
+        registeredUsers.clear();
         buttons.clear();
     }
     
@@ -59,7 +61,7 @@ public class SearchFriendsActivity extends AppCompatActivity
         toolbar.setTitle(R.string.friends_search);
         
         buttons = new ArrayList<MyButton>();
-        list = new ArrayList<UserRegistered>();
+        registeredUsers = new ArrayList<UserRegistered>();
         adapter = new UserListAdapter(SearchFriendsActivity.this, new ArrayList<UserRegistered>(), new ArrayList<MyButton>());
         
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -79,7 +81,7 @@ public class SearchFriendsActivity extends AppCompatActivity
         usersContainer.setAdapter(adapter);
     }
     
-    public void displayMessage(UserRegistered user, MyButton button) {
+    public void displayItem(UserRegistered user, MyButton button) {
         adapter.add(user, button);
         adapter.notifyDataSetChanged();
     }
@@ -99,7 +101,7 @@ public class SearchFriendsActivity extends AppCompatActivity
                     UserRegistered registered = new UserRegistered(userRegistered.getString("username"),
                             userRegistered.getString("email"),
                             userRegistered.getString("id"));
-                    list.add(registered);
+                    registeredUsers.add(registered);
                     buttons.add(new MyButton(this, Integer.parseInt(registered.getId())));
                 }
                 
@@ -108,13 +110,11 @@ public class SearchFriendsActivity extends AppCompatActivity
         }
     }
 
-    protected void TUTAJFUNKCJA()
+    protected void GetRegisteredUsers()
     {
         WSocket wSocket = WSocket.getwSocketInstance();
         wSocket.sendData(UserRegistered.getAllUsers(UserLogged.getUserLoggedInstance().getToken()).toString());
-
-        List<UserRegistered> registeredUsers = new ArrayList<UserRegistered>();
-
+        
         synchronized (wSocket.notifier) {
             try {
                 wSocket.notifier.wait();
@@ -128,6 +128,23 @@ public class SearchFriendsActivity extends AppCompatActivity
                     registeredUsers.add(registered);
                 }
 
+            } catch (Exception exep) {
+            }
+        }
+    }
+    
+    public static void sendInvitation(int id)
+    {
+        boolean dodano = false;
+        WSocket wSocket = WSocket.getwSocketInstance();
+        wSocket.sendData(UserLogged.addFriend(Integer.toString(id), UserLogged.getUserLoggedInstance().getToken()).toString());
+        
+        synchronized (wSocket.notifier) {
+            try {
+                wSocket.notifier.wait(4000);
+                if(wSocket.status.equals("200"))
+                    dodano =true;
+                
             } catch (Exception exep) {
             }
         }

@@ -6,6 +6,7 @@ package talkerapp.talkerapp.userList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import java.util.List;
 
 import talkerapp.talkerapp.MyButton;
 import talkerapp.talkerapp.R;
+import talkerapp.talkerapp.SearchFriendsActivity;
 import tomek.UserRegistered;
 
 public class UserListAdapter extends BaseAdapter
@@ -76,7 +78,7 @@ public class UserListAdapter extends BaseAdapter
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         UserRegistered user = getItem(position);
-        MyButton btnId = getItemButton(position);
+        final MyButton btnId = getItemButton(position);
         LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         
         if (convertView == null) {
@@ -90,6 +92,14 @@ public class UserListAdapter extends BaseAdapter
         holder.txtMessage.setText(user.getEmail());
         holder.txtInfo.setText(user.getUsername());
         holder.btn.setText(R.string.invite_user);
+        holder.btn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                SearchFriendsActivity.sendInvitation(btnId.getId());
+            }
+        });
         
         return convertView;
     }

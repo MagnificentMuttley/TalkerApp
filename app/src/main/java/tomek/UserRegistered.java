@@ -2,6 +2,7 @@ package tomek;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import talkerapp.talkerapp.SearchFriendsActivity;
 
 /**
  * Created by tomek on 10.06.2017.
