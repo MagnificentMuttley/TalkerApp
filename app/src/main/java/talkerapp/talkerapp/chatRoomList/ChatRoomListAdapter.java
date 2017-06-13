@@ -1,7 +1,7 @@
-package talkerapp.talkerapp.friendsList;
+package talkerapp.talkerapp.chatRoomList;
 
 /**
- * Created by Adrian on 12.06.2017.
+ * Created by Adrian on 13.06.2017.
  */
 
 import android.app.Activity;
@@ -18,44 +18,42 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import talkerapp.talkerapp.FriendsListActivity;
 import talkerapp.talkerapp.MyButton;
 import talkerapp.talkerapp.R;
-import tomek.UserRegistered;
 
-public class FriendsListAdapter extends BaseAdapter
+public class ChatRoomListAdapter extends BaseAdapter
 {
-    private final List<UserRegistered> usersRegistered;
+    private final List<String> chatRooms;
     private final List<MyButton> buttons;
     private Activity context;
-    
-    public FriendsListAdapter(Activity context, List<UserRegistered> chatMessages, List<MyButton> buttons) {
+
+    public ChatRoomListAdapter(Activity context, List<String> chatMessages, List<MyButton> buttons) {
         this.context = context;
-        this.usersRegistered = chatMessages;
+        this.chatRooms = chatMessages;
         this.buttons = buttons;
     }
-    
+
     @Override
     public int getCount() {
-        if (usersRegistered != null) {
-            return usersRegistered.size();
+        if (chatRooms != null) {
+            return chatRooms.size();
         } else {
             return 0;
         }
     }
-    
+
     @Override
-    public UserRegistered getItem(int position)
+    public String getItem(int position)
     {
-        if (usersRegistered != null) {
-            return usersRegistered.get(position);
+        if (chatRooms != null) {
+            return chatRooms.get(position);
         }
         else
         {
             return null;
         }
     }
-    
+
     public MyButton getItemButton(int position)
     {
         if (buttons != null) {
@@ -66,92 +64,90 @@ public class FriendsListAdapter extends BaseAdapter
             return null;
         }
     }
-    
+
     @Override
     public long getItemId(int position)
     {
         return position;
     }
-    
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        UserRegistered user = getItem(position);
+        String user = getItem(position);
         final MyButton btnId = getItemButton(position);
         LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        
+
         if (convertView == null) {
-            convertView = vi.inflate(R.layout.list_item_friend, null);
+            convertView = vi.inflate(R.layout.list_item_chat_room, null);
             holder = createViewHolder(convertView);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        
-        holder.txtMessage.setText(user.getEmail());
-        holder.txtInfo.setText(user.getUsername());
-        holder.btn.setText(R.string.talk);
+
+        holder.txtMessage.setText(user);
+        holder.txtInfo.setText("nic");
+        holder.btn.setText(R.string.accept_invitation);
         holder.btn.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                FriendsListActivity.inviteToChat(btnId.getId());
+
             }
         });
-
-        
         return convertView;
     }
-    
-    public void add(UserRegistered message, MyButton button)
+
+    public void add(String message, MyButton button)
     {
-        usersRegistered.add(message);
+        chatRooms.add(message);
         buttons.add(button);
     }
-    
-    public void add(List<UserRegistered> messages, List<MyButton> button)
+
+    public void add(List<String> messages, List<MyButton> button)
     {
-        usersRegistered.addAll(messages);
+        chatRooms.addAll(messages);
         buttons.addAll(button);
     }
-    
+
     private void setAlignment(ViewHolder holder)
     {
         holder.contentWithBG.setBackgroundResource(R.drawable.out_message_bg);
-        
+
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) holder.contentWithBG.getLayoutParams();
         layoutParams.gravity = Gravity.RIGHT;
         holder.contentWithBG.setLayoutParams(layoutParams);
-        
+
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) holder.content.getLayoutParams();
         lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
         lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         holder.content.setLayoutParams(lp);
-        
+
         layoutParams = (LinearLayout.LayoutParams) holder.txtMessage.getLayoutParams();
         layoutParams.gravity = Gravity.RIGHT;
         holder.txtMessage.setLayoutParams(layoutParams);
-        
+
         layoutParams = (LinearLayout.LayoutParams) holder.btn.getLayoutParams();
         layoutParams.gravity = Gravity.RIGHT;
         holder.btn.setLayoutParams(layoutParams);
-        
+
         layoutParams = (LinearLayout.LayoutParams) holder.txtInfo.getLayoutParams();
         layoutParams.gravity = Gravity.RIGHT;
         holder.txtInfo.setLayoutParams(layoutParams);
     }
-    
+
     private ViewHolder createViewHolder(View v) {
         ViewHolder holder = new ViewHolder();
         holder.txtMessage = (TextView) v.findViewById(R.id.txtMessage);
-        holder.btn = (Button) v.findViewById(R.id.button_talk);
+        holder.btn = (Button) v.findViewById(R.id.button_chat);
         holder.content = (LinearLayout) v.findViewById(R.id.content);
         holder.contentWithBG = (LinearLayout) v.findViewById(R.id.contentWithBackground);
         holder.txtInfo = (TextView) v.findViewById(R.id.txtInfo);
         return holder;
     }
-    
+
     private static class ViewHolder {
         public Button btn;
         public TextView txtMessage;

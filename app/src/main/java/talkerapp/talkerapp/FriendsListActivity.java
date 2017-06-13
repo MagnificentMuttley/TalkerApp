@@ -114,11 +114,11 @@ public class FriendsListActivity extends AppCompatActivity {
 
     }
 
-    protected void inviteToChat()
+    public static void inviteToChat(int id)
     {
         WSocket wSocket=WSocket.getwSocketInstance();
         // tutaj dodaj id
-        wSocket.sendData(UserLogged.inviteToChat(id, UserLogged.getUserLoggedInstance().getToken()));
+        wSocket.sendData(UserLogged.inviteToChat(Integer.toString(id), UserLogged.getUserLoggedInstance().getToken()).toString());
 
         synchronized (wSocket.notifier) {
             try {

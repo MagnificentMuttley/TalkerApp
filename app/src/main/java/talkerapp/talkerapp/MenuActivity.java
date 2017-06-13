@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -21,6 +23,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import talkerapp.talkerapp.chatRoomList.ChatRoomListAdapter;
+import talkerapp.talkerapp.friendsList.FriendsListAdapter;
 import tomek.UserLogged;
 import tomek.UserRegistered;
 import tomek.WSocket;
@@ -29,9 +33,12 @@ import tomek.WSocket;
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     FloatingActionButton fab;
-    Button sendMsg;
-    EditText editText;
-    TextView txtView;
+    private ArrayList<MyButton> buttons;
+    private ListView usersContainer;
+    private ChatRoomListAdapter adapter;
+    private ArrayList<String> chatList;
+    private ArrayList<String> memberList;
+    private ArrayList<String> memberUsernames;
     TextView txtViewUsername;
     TextView txtViewEmail;
     Toolbar toolbar;
@@ -61,6 +68,40 @@ public class MenuActivity extends AppCompatActivity
         txtViewEmail.setText(UserLogged.getUserLoggedInstance().getEmail());
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void initControls() {
+        toolbar = (Toolbar) findViewById(R.id.toolbarT);
+        setSupportActionBar(toolbar);
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+        chatList = new ArrayList<String>();
+        memberList = new ArrayList<String>();
+        memberUsernames = new ArrayList<String>();
+        buttons = new ArrayList<MyButton>();
+
+        adapter = new ChatRoomListAdapter(MenuActivity.this, new ArrayList<String>(), new ArrayList<MyButton>());
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                onBackPressed();
+            }
+        });
+
+        usersContainer = (ListView) findViewById(R.id.friendsContainer);
+        RelativeLayout container = (RelativeLayout) findViewById(R.id.container);
+
+        usersContainer.setAdapter(adapter);
     }
 
     @Override
@@ -136,11 +177,6 @@ public class MenuActivity extends AppCompatActivity
 
                 JSONArray payload = wSocket.jsonMsg.getJSONArray("payload");
                 JSONArray members;
-
-
-                ArrayList<String> chatList = new ArrayList<String>();
-                ArrayList<String> memberList = new ArrayList<String>();
-                ArrayList<String> memberUsernames = new ArrayList<String>();
                 String memberID;
                 String chatID;
                 String memberUsername;
@@ -149,6 +185,8 @@ public class MenuActivity extends AppCompatActivity
                     JSONObject chats = payload.getJSONObject(i);
                     chatID = chats.getString("id");
                     chatList.add(chatID);
+                    buttons.add(new MyButton(this, Integer.parseInt(chatID)));
+
 
                     members = chats.getJSONArray("GroupChatMembers");
                     for (int j = 0; j < chats.length(); j++) {
@@ -161,7 +199,6 @@ public class MenuActivity extends AppCompatActivity
                         }
 
                     }
-                    //buttons.add(new MyButton(this, Integer.parseInt(registered.getId())));
                 }
 
             } catch (Exception exep) {
