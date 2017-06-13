@@ -70,8 +70,8 @@ public class UserLogged extends User implements JSONStringer {
 
     }
 
-    public static JSONObject getMyChats()
-    {String scope = "groupChat";
+    public static JSONObject getMyChats() {
+        String scope = "groupChat";
         String method = "myChatRooms";
 
         JSONObject procedureObject = new JSONObject();
@@ -91,9 +91,10 @@ public class UserLogged extends User implements JSONStringer {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return finalObject;}
+        return finalObject;
+    }
 
-    public static JSONObject inviteToChat(String id, String token) {
+    public static JSONObject inviteToChat(String id2, String token) {
         String scope = "groupChat";
         String method = "newChat";
 
@@ -102,12 +103,66 @@ public class UserLogged extends User implements JSONStringer {
         JSONObject payloadObject = new JSONObject();
         JSONObject finalObject = new JSONObject();
 
+        ArrayList<String> lista = new ArrayList<String>();
+        lista.add(id2);
+        lista.add(getUserLoggedInstance().getId());
         try {
             headerObject.put("token", token);
             procedureObject.put("scope", scope);
             procedureObject.put("method", method);
-            payloadObject.put("invitees", getUserLoggedInstance().getId());
-            payloadObject.put("invitees", id);
+            // payloadObject.put("invitees", getUserLoggedInstance().getId());
+            payloadObject.put("invitees", lista);
+            finalObject.put("procedure", procedureObject);
+            finalObject.put("meta", headerObject);
+            finalObject.put("payload", payloadObject);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return finalObject;
+    }
+
+    public static JSONObject sendMessage(String chatID, String message)
+    {
+        String scope = "groupChat";
+        String method = "newMessage";
+
+        JSONObject procedureObject = new JSONObject();
+        JSONObject headerObject = new JSONObject();
+        JSONObject payloadObject = new JSONObject();
+        JSONObject finalObject = new JSONObject();
+
+        try {
+            headerObject.put("token", getUserLoggedInstance().token);
+            procedureObject.put("scope", scope);
+            procedureObject.put("method", method);
+            // payloadObject.put("invitees", getUserLoggedInstance().getId());
+            payloadObject.put("roomId", chatID);
+            payloadObject.put("content", message);
+            finalObject.put("procedure", procedureObject);
+            finalObject.put("meta", headerObject);
+            finalObject.put("payload", payloadObject);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return finalObject;
+    }
+
+    public static JSONObject getMessages() {
+        String scope = "groupChat";
+        String method = "getMessages";
+
+        JSONObject procedureObject = new JSONObject();
+        JSONObject headerObject = new JSONObject();
+        JSONObject payloadObject = new JSONObject();
+        JSONObject finalObject = new JSONObject();
+
+        try {
+            headerObject.put("token", UserLogged.getUserLoggedInstance().token);
+            procedureObject.put("scope", scope);
+            procedureObject.put("method", method);
+
             finalObject.put("procedure", procedureObject);
             finalObject.put("meta", headerObject);
             finalObject.put("payload", payloadObject);
