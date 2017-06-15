@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import talkerapp.talkerapp.MenuActivity;
 import talkerapp.talkerapp.MyButton;
 import talkerapp.talkerapp.R;
 
@@ -87,14 +88,13 @@ public class ChatRoomListAdapter extends BaseAdapter
         }
 
         holder.txtMessage.setText(user);
-        holder.txtInfo.setText("nic");
-        holder.btn.setText(R.string.accept_invitation);
+        holder.txtInfo.setText(" ");
+        holder.btn.setText(R.string.chat);
         holder.btn.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-
             }
         });
         return convertView;

@@ -89,7 +89,7 @@ public class AccoutActivity extends Activity {
                 {
                     try
                     {
-                        wSocket.notifier.wait();
+                        wSocket.notifier.wait(4000);
                         Log.d("wSocket status", wSocket.status);
                         if (wSocket.status.equals("200")) {
                             String token = wSocket.payload;
@@ -99,7 +99,7 @@ public class AccoutActivity extends Activity {
                             {
                                 try
                                 {
-                                    wSocket.notifier.wait();
+                                    wSocket.notifier.wait(4000);
                                     
                                     JSONObject payload = wSocket.jsonMsg.getJSONObject("payload");
                                     

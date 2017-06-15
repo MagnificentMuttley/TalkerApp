@@ -45,6 +45,32 @@ public class UserLogged extends User implements JSONStringer {
         userLoggedInstance.friends = friendList;
     }
 
+    public static JSONObject getMyChatRooms()
+    {
+        String scope = "groupChat";
+        String method = "myChatRooms";
+
+        JSONObject procedureObject = new JSONObject();
+        JSONObject headerObject = new JSONObject();
+        JSONObject payloadObject = new JSONObject();
+        JSONObject finalObject = new JSONObject();
+
+        try {
+            headerObject.put("token", getUserLoggedInstance().token);
+            procedureObject.put("scope", scope);
+            procedureObject.put("method", method);
+            finalObject.put("procedure", procedureObject);
+            finalObject.put("meta", headerObject);
+            finalObject.put("payload", payloadObject);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return finalObject;
+
+
+    }
+
     public static JSONObject addFriend(String id, String token) {
         String scope = "friendship";
         String method = "inviteFriend";
@@ -96,7 +122,7 @@ public class UserLogged extends User implements JSONStringer {
 
     public static JSONObject inviteToChat(String id2, String token) {
         String scope = "groupChat";
-        String method = "newChat";
+        String method = "newRoom";
 
         JSONObject procedureObject = new JSONObject();
         JSONObject headerObject = new JSONObject();
