@@ -1,7 +1,7 @@
-package tomek;
+package javaClasses;
 
 /**
- * Created by tomek on 09.06.2017.
+ * Created by javaClasses on 09.06.2017.
  */
 
 public class Notifier {

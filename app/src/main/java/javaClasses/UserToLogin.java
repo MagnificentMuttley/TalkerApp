@@ -1,10 +1,10 @@
-package tomek;
+package javaClasses;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by tomek on 09.06.2017.
+ * Created by javaClasses on 09.06.2017.
  */
 
 public class UserToLogin {

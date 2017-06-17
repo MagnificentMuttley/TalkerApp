@@ -4,29 +4,24 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import tomek.UserLogged;
-import tomek.UserToLogin;
-import tomek.WSocket;
+import javaClasses.UserLogged;
+import javaClasses.UserToLogin;
+import javaClasses.WSocket;
 
-import static tomek.UserLogged.LoggedUserInfo;
+import static javaClasses.UserLogged.LoggedUserInfo;
 
 public class AccoutActivity extends Activity {
     private EditText login;

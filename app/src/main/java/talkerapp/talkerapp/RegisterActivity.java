@@ -15,11 +15,11 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 
-import tomek.UserAdd;
-import tomek.UserLogged;
-import tomek.WSocket;
+import javaClasses.UserAdd;
+import javaClasses.UserLogged;
+import javaClasses.WSocket;
 
-import static tomek.UserLogged.LoggedUserInfo;
+import static javaClasses.UserLogged.LoggedUserInfo;
 
 public class RegisterActivity extends AppCompatActivity {
     private Toolbar toolbar;

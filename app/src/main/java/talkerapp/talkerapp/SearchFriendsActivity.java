@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -16,9 +14,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import talkerapp.talkerapp.userList.UserListAdapter;
-import tomek.UserLogged;
-import tomek.UserRegistered;
-import tomek.WSocket;
+import javaClasses.UserLogged;
+import javaClasses.UserRegistered;
+import javaClasses.WSocket;
 
 public class SearchFriendsActivity extends AppCompatActivity
 {

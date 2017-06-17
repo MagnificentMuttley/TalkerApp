@@ -6,7 +6,6 @@ package talkerapp.talkerapp.userList;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +22,7 @@ import java.util.List;
 import talkerapp.talkerapp.MyButton;
 import talkerapp.talkerapp.R;
 import talkerapp.talkerapp.SearchFriendsActivity;
-import tomek.UserRegistered;
+import javaClasses.UserRegistered;
 
 public class UserListAdapter extends BaseAdapter
 {
