@@ -34,7 +34,7 @@ public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     FloatingActionButton fab;
     private ArrayList<MyButton> buttons;
-    private ListView usersContainer;
+    private ListView friendsContainer;
     private ChatRoomListAdapter adapter;
     private ArrayList<String> chatList;
     private ArrayList<String> memberList;
@@ -98,11 +98,11 @@ public class MenuActivity extends AppCompatActivity
                 onBackPressed();
             }
         });
-
-        usersContainer = (ListView) findViewById(R.id.friendsContainer);
+    
+        friendsContainer = (ListView) findViewById(R.id.friendsContainer);
         RelativeLayout container = (RelativeLayout) findViewById(R.id.container);
-
-        usersContainer.setAdapter(adapter);
+    
+        friendsContainer.setAdapter(adapter);
     }
 
     @Override

@@ -28,17 +28,22 @@ public class ChatRoomListAdapter extends BaseAdapter
     private final List<MyButton> buttons;
     private Activity context;
 
-    public ChatRoomListAdapter(Activity context, List<String> chatMessages, List<MyButton> buttons) {
+    public ChatRoomListAdapter(Activity context, List<String> chatRooms, List<MyButton> buttons)
+    {
         this.context = context;
-        this.chatRooms = chatMessages;
+        this.chatRooms = chatRooms;
         this.buttons = buttons;
     }
 
     @Override
-    public int getCount() {
-        if (chatRooms != null) {
+    public int getCount()
+    {
+        if (chatRooms != null)
+        {
             return chatRooms.size();
-        } else {
+        }
+        else
+        {
             return 0;
         }
     }
@@ -46,7 +51,8 @@ public class ChatRoomListAdapter extends BaseAdapter
     @Override
     public String getItem(int position)
     {
-        if (chatRooms != null) {
+        if (chatRooms != null)
+        {
             return chatRooms.get(position);
         }
         else
@@ -57,7 +63,8 @@ public class ChatRoomListAdapter extends BaseAdapter
 
     public MyButton getItemButton(int position)
     {
-        if (buttons != null) {
+        if (buttons != null)
+        {
             return buttons.get(position);
         }
         else
@@ -79,16 +86,19 @@ public class ChatRoomListAdapter extends BaseAdapter
         final MyButton btnId = getItemButton(position);
         LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if (convertView == null) {
+        if (convertView == null)
+        {
             convertView = vi.inflate(R.layout.list_item_chat_room, null);
             holder = createViewHolder(convertView);
             convertView.setTag(holder);
-        } else {
+        }
+        else
+        {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.txtMessage.setText(user);
-        holder.txtInfo.setText(" ");
+        holder.username.setText(user);
+        holder.email.setText(" ");
         holder.btn.setText(R.string.chat);
         holder.btn.setOnClickListener(new View.OnClickListener()
         {
@@ -114,8 +124,6 @@ public class ChatRoomListAdapter extends BaseAdapter
 
     private void setAlignment(ViewHolder holder)
     {
-        holder.contentWithBG.setBackgroundResource(R.drawable.out_message_bg);
-
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) holder.contentWithBG.getLayoutParams();
         layoutParams.gravity = Gravity.RIGHT;
         holder.contentWithBG.setLayoutParams(layoutParams);
@@ -125,33 +133,33 @@ public class ChatRoomListAdapter extends BaseAdapter
         lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         holder.content.setLayoutParams(lp);
 
-        layoutParams = (LinearLayout.LayoutParams) holder.txtMessage.getLayoutParams();
+        layoutParams = (LinearLayout.LayoutParams) holder.username.getLayoutParams();
         layoutParams.gravity = Gravity.RIGHT;
-        holder.txtMessage.setLayoutParams(layoutParams);
+        holder.username.setLayoutParams(layoutParams);
 
         layoutParams = (LinearLayout.LayoutParams) holder.btn.getLayoutParams();
         layoutParams.gravity = Gravity.RIGHT;
         holder.btn.setLayoutParams(layoutParams);
 
-        layoutParams = (LinearLayout.LayoutParams) holder.txtInfo.getLayoutParams();
+        layoutParams = (LinearLayout.LayoutParams) holder.email.getLayoutParams();
         layoutParams.gravity = Gravity.RIGHT;
-        holder.txtInfo.setLayoutParams(layoutParams);
+        holder.email.setLayoutParams(layoutParams);
     }
 
     private ViewHolder createViewHolder(View v) {
         ViewHolder holder = new ViewHolder();
-        holder.txtMessage = (TextView) v.findViewById(R.id.txtMessage);
+        holder.username = (TextView) v.findViewById(R.id.chatList_username);
         holder.btn = (Button) v.findViewById(R.id.button_chat);
         holder.content = (LinearLayout) v.findViewById(R.id.content);
         holder.contentWithBG = (LinearLayout) v.findViewById(R.id.contentWithBackground);
-        holder.txtInfo = (TextView) v.findViewById(R.id.txtInfo);
+        holder.email = (TextView) v.findViewById(R.id.chatList_email);
         return holder;
     }
 
     private static class ViewHolder {
         public Button btn;
-        public TextView txtMessage;
-        public TextView txtInfo;
+        public TextView username;
+        public TextView email;
         public LinearLayout content;
         public LinearLayout contentWithBG;
     }

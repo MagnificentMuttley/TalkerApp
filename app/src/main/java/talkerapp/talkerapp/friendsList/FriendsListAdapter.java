@@ -25,21 +25,25 @@ import tomek.UserRegistered;
 
 public class FriendsListAdapter extends BaseAdapter
 {
-    private final List<UserRegistered> usersRegistered;
+    private final List<UserRegistered> friends;
     private final List<MyButton> buttons;
     private Activity context;
     
-    public FriendsListAdapter(Activity context, List<UserRegistered> chatMessages, List<MyButton> buttons) {
+    public FriendsListAdapter(Activity context, List<UserRegistered> friends, List<MyButton> buttons) {
         this.context = context;
-        this.usersRegistered = chatMessages;
+        this.friends = friends;
         this.buttons = buttons;
     }
     
     @Override
-    public int getCount() {
-        if (usersRegistered != null) {
-            return usersRegistered.size();
-        } else {
+    public int getCount()
+    {
+        if (friends != null)
+        {
+            return friends.size();
+        }
+        else
+        {
             return 0;
         }
     }
@@ -47,8 +51,9 @@ public class FriendsListAdapter extends BaseAdapter
     @Override
     public UserRegistered getItem(int position)
     {
-        if (usersRegistered != null) {
-            return usersRegistered.get(position);
+        if (friends != null)
+        {
+            return friends.get(position);
         }
         else
         {
@@ -58,7 +63,8 @@ public class FriendsListAdapter extends BaseAdapter
     
     public MyButton getItemButton(int position)
     {
-        if (buttons != null) {
+        if (buttons != null)
+        {
             return buttons.get(position);
         }
         else
@@ -74,22 +80,26 @@ public class FriendsListAdapter extends BaseAdapter
     }
     
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent)
+    {
         ViewHolder holder;
         UserRegistered user = getItem(position);
         final MyButton btnId = getItemButton(position);
         LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         
-        if (convertView == null) {
+        if (convertView == null)
+        {
             convertView = vi.inflate(R.layout.list_item_friend, null);
             holder = createViewHolder(convertView);
             convertView.setTag(holder);
-        } else {
+        }
+        else
+        {
             holder = (ViewHolder) convertView.getTag();
         }
         
-        holder.txtMessage.setText(user.getEmail());
-        holder.txtInfo.setText(user.getUsername());
+        holder.username.setText(user.getUsername());
+        holder.email.setText(user.getEmail());
         holder.btn.setText(R.string.talk);
         holder.btn.setOnClickListener(new View.OnClickListener()
         {
@@ -106,20 +116,18 @@ public class FriendsListAdapter extends BaseAdapter
     
     public void add(UserRegistered message, MyButton button)
     {
-        usersRegistered.add(message);
+        friends.add(message);
         buttons.add(button);
     }
     
     public void add(List<UserRegistered> messages, List<MyButton> button)
     {
-        usersRegistered.addAll(messages);
+        friends.addAll(messages);
         buttons.addAll(button);
     }
     
     private void setAlignment(ViewHolder holder)
     {
-        holder.contentWithBG.setBackgroundResource(R.drawable.out_message_bg);
-        
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) holder.contentWithBG.getLayoutParams();
         layoutParams.gravity = Gravity.RIGHT;
         holder.contentWithBG.setLayoutParams(layoutParams);
@@ -129,33 +137,35 @@ public class FriendsListAdapter extends BaseAdapter
         lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         holder.content.setLayoutParams(lp);
         
-        layoutParams = (LinearLayout.LayoutParams) holder.txtMessage.getLayoutParams();
+        layoutParams = (LinearLayout.LayoutParams) holder.username.getLayoutParams();
         layoutParams.gravity = Gravity.RIGHT;
-        holder.txtMessage.setLayoutParams(layoutParams);
+        holder.username.setLayoutParams(layoutParams);
         
         layoutParams = (LinearLayout.LayoutParams) holder.btn.getLayoutParams();
         layoutParams.gravity = Gravity.RIGHT;
         holder.btn.setLayoutParams(layoutParams);
         
-        layoutParams = (LinearLayout.LayoutParams) holder.txtInfo.getLayoutParams();
+        layoutParams = (LinearLayout.LayoutParams) holder.email.getLayoutParams();
         layoutParams.gravity = Gravity.RIGHT;
-        holder.txtInfo.setLayoutParams(layoutParams);
+        holder.email.setLayoutParams(layoutParams);
     }
     
-    private ViewHolder createViewHolder(View v) {
+    private ViewHolder createViewHolder(View v)
+    {
         ViewHolder holder = new ViewHolder();
-        holder.txtMessage = (TextView) v.findViewById(R.id.txtMessage);
+        holder.username = (TextView) v.findViewById(R.id.friendsList_username);
         holder.btn = (Button) v.findViewById(R.id.button_talk);
         holder.content = (LinearLayout) v.findViewById(R.id.content);
         holder.contentWithBG = (LinearLayout) v.findViewById(R.id.contentWithBackground);
-        holder.txtInfo = (TextView) v.findViewById(R.id.txtInfo);
+        holder.email = (TextView) v.findViewById(R.id.friendsList_email);
         return holder;
     }
     
-    private static class ViewHolder {
+    private static class ViewHolder
+    {
         public Button btn;
-        public TextView txtMessage;
-        public TextView txtInfo;
+        public TextView username;
+        public TextView email;
         public LinearLayout content;
         public LinearLayout contentWithBG;
     }

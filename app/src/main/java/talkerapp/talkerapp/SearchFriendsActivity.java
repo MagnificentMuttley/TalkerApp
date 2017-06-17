@@ -109,44 +109,23 @@ public class SearchFriendsActivity extends AppCompatActivity
             }
         }
     }
-
-    protected void GetRegisteredUsers()
-    {
-        WSocket wSocket = WSocket.getwSocketInstance();
-        wSocket.sendData(UserRegistered.getAllUsers(UserLogged.getUserLoggedInstance().getToken()).toString());
-        
-        synchronized (wSocket.notifier) {
-            try {
-                wSocket.notifier.wait();
-
-                JSONArray payload = wSocket.jsonMsg.getJSONArray("payload");
-                for (int i =0; i<payload.length();i++) {
-                    JSONObject userRegistered = payload.getJSONObject(i);
-                    UserRegistered registered = new UserRegistered(userRegistered.getString("username"),
-                            userRegistered.getString("email"),
-                            userRegistered.getString("id"));
-                    registeredUsers.add(registered);
-                }
-
-            } catch (Exception exep) {
-            }
-        }
-    }
     
-    public static void sendInvitation(int id)
+    public static boolean sendInvitation(int id)
     {
-        boolean dodano = false;
+        boolean send = false;
         WSocket wSocket = WSocket.getwSocketInstance();
         wSocket.sendData(UserLogged.addFriend(Integer.toString(id), UserLogged.getUserLoggedInstance().getToken()).toString());
         
-        synchronized (wSocket.notifier) {
+        synchronized (wSocket.notifier)
+        {
             try {
                 wSocket.notifier.wait(4000);
                 if(wSocket.status.equals("200"))
-                    dodano =true;
+                    send = true;
                 
             } catch (Exception exep) {
             }
         }
+        return send;
     }
 }

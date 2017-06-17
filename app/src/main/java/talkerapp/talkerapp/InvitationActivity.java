@@ -99,7 +99,6 @@ public class InvitationActivity extends AppCompatActivity {
                             userRegistered.getString("email"),
                             userRegistered.getString("id"));
                     friendsRequests.add(registered);
-                    Log.d("Zaproszenie: ", registered.getId());
                     buttons.add(new MyButton(this, Integer.parseInt(registered.getId())));
                 }
 
@@ -109,9 +108,9 @@ public class InvitationActivity extends AppCompatActivity {
         }
     }
 
-    public static void AcceptInvitation(int id)
+    public static boolean AcceptInvitation(int id)
     {
-        boolean dodano = false;
+        boolean added = false;
     
         WSocket wSocket = WSocket.getwSocketInstance();
         
@@ -121,17 +120,17 @@ public class InvitationActivity extends AppCompatActivity {
             try {
                 wSocket.notifier.wait(4000);
                 if (wSocket.status.equals("200"))
-                    dodano = true;
+                    added = true;
 
             } catch (Exception exep) {
             }
         }
-    //tu możesz if(dodano) i tosta zrobić
+        return added;
     }
     
-    public static void RejectInvitation(int id)
+    public static boolean RejectInvitation(int id)
     {
-        boolean dodano = false;
+        boolean rejected = false;
         
         WSocket wSocket = WSocket.getwSocketInstance();
         
@@ -141,11 +140,11 @@ public class InvitationActivity extends AppCompatActivity {
             try {
                 wSocket.notifier.wait(4000);
                 if (wSocket.status.equals("200"))
-                    dodano = true;
+                    rejected = true;
 
             } catch (Exception exep) {
             }
         }
-        //tu możesz if(dodano) i tosta zrobić
+        return rejected;
     }
 }
