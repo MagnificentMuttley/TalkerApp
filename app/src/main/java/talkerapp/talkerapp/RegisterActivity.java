@@ -20,6 +20,7 @@ import javaClasses.UserLogged;
 import javaClasses.WSocket;
 
 
+
 public class RegisterActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private Button registerButton;
