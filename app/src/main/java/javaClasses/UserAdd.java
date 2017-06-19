@@ -1,9 +1,7 @@
-package tomek;
+package javaClasses;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /**
  * Created by tomek on 06.05.2017.

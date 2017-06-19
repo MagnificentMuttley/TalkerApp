@@ -34,7 +34,7 @@
     <string name="settings">Ustawienia</string>
     <string name="logout">Wyloguj</string>
 
-    <string name="contacts_title">Kontakty</string>
+    <string name="contacts_title">Rozmowy</string>
     <string name="new_message_placeholder">Wprowadź nową wiadomość</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

@@ -1,8 +1,6 @@
-package tomek;
+package javaClasses;
 
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /**
  * Created by Tomek on 30.05.2017.

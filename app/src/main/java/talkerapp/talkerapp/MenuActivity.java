@@ -12,8 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,10 +22,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import talkerapp.talkerapp.chatRoomList.ChatRoomListAdapter;
-import talkerapp.talkerapp.friendsList.FriendsListAdapter;
-import tomek.UserLogged;
-import tomek.UserRegistered;
-import tomek.WSocket;
+import javaClasses.UserLogged;
+import javaClasses.WSocket;
 
 
 public class MenuActivity extends AppCompatActivity
@@ -68,6 +64,7 @@ public class MenuActivity extends AppCompatActivity
         txtViewEmail.setText(UserLogged.getUserLoggedInstance().getEmail());
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        initControls();
         getMyChats();
     }
 

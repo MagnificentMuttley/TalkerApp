@@ -1,4 +1,4 @@
-package tomek;
+package javaClasses;
 
 /**
  * Created by tomek on 09.06.2017.

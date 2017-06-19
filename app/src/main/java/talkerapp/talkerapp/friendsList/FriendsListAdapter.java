@@ -21,7 +21,7 @@ import java.util.List;
 import talkerapp.talkerapp.FriendsListActivity;
 import talkerapp.talkerapp.MyButton;
 import talkerapp.talkerapp.R;
-import tomek.UserRegistered;
+import javaClasses.UserRegistered;
 
 public class FriendsListAdapter extends BaseAdapter
 {

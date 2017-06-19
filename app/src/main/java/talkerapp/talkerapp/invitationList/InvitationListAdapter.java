@@ -22,7 +22,7 @@ import java.util.List;
 import talkerapp.talkerapp.InvitationActivity;
 import talkerapp.talkerapp.MyButton;
 import talkerapp.talkerapp.R;
-import tomek.UserRegistered;
+import javaClasses.UserRegistered;
 
 public class InvitationListAdapter extends BaseAdapter
 {

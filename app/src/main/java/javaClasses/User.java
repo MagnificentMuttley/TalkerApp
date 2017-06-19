@@ -1,8 +1,4 @@
-package tomek;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONStringer;
+package javaClasses;
 
 import java.io.Serializable;
 
@@ -10,7 +6,7 @@ import java.io.Serializable;
  * Created by tomek on 06.05.2017.
  */
 
-public abstract class User implements Serializable, tomek.JSONStringer {
+public abstract class User implements Serializable, javaClasses.JSONStringer {
     private String email;
     private String userName;
 

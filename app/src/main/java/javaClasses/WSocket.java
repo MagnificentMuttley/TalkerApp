@@ -1,4 +1,4 @@
-package tomek;
+package javaClasses;
 
 import android.util.Log;
 
