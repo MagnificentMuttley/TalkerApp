@@ -85,7 +85,7 @@ public class FriendsListActivity extends AppCompatActivity {
 
     protected void getAllFriends() {
         WSocket wSocket = WSocket.getwSocketInstance();
-        wSocket.sendData(UserLogged.getFriends(UserLogged.getUserLoggedInstance().getToken()).toString());
+        wSocket.sendData(UserLogged.getFriends().toString());
 
         synchronized (wSocket.notifier) {
             try {
@@ -113,7 +113,7 @@ public class FriendsListActivity extends AppCompatActivity {
     {
         WSocket wSocket=WSocket.getwSocketInstance();
         // tutaj dodaj id
-        wSocket.sendData(UserLogged.inviteToChat(Integer.toString(id), UserLogged.getUserLoggedInstance().getToken()).toString());
+        wSocket.sendData(UserLogged.inviteToChat(Integer.toString(id)).toString());
 
         synchronized (wSocket.notifier) {
             try {
@@ -129,7 +129,7 @@ public class FriendsListActivity extends AppCompatActivity {
     {
         boolean dodano = false;
         WSocket wSocket = WSocket.getwSocketInstance();
-        wSocket.sendData(UserLogged.removeFriend(Integer.toString(id), UserLogged.getUserLoggedInstance().getToken()).toString());
+        wSocket.sendData(UserLogged.removeFriend(Integer.toString(id)).toString());
 
         synchronized (wSocket.notifier) {
             try {

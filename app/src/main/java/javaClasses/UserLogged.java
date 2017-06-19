@@ -70,7 +70,7 @@ public class UserLogged extends User implements JSONStringer {
 
     }
 
-    public static JSONObject addFriend(String id, String token) {
+    public static JSONObject addFriend(String id) {
         String scope = "friendship";
         String method = "inviteFriend";
 
@@ -80,7 +80,7 @@ public class UserLogged extends User implements JSONStringer {
         JSONObject finalObject = new JSONObject();
 
         try {
-            headerObject.put("token", token);
+            headerObject.put("token", getUserLoggedInstance().getToken());
             procedureObject.put("scope", scope);
             procedureObject.put("method", method);
             payloadObject.put("id", id);
@@ -119,7 +119,7 @@ public class UserLogged extends User implements JSONStringer {
         return finalObject;
     }
 
-    public static JSONObject inviteToChat(String id2, String token) {
+    public static JSONObject inviteToChat(String id2) {
         String scope = "groupChat";
         String method = "newRoom";
 
@@ -132,7 +132,7 @@ public class UserLogged extends User implements JSONStringer {
         lista.add(id2);
         lista.add(getUserLoggedInstance().getId());
         try {
-            headerObject.put("token", token);
+            headerObject.put("token", getUserLoggedInstance().getToken());
             procedureObject.put("scope", scope);
             procedureObject.put("method", method);
             // payloadObject.put("invitees", getUserLoggedInstance().getId());
@@ -198,7 +198,7 @@ public class UserLogged extends User implements JSONStringer {
         return finalObject;
     }
 
-    public static JSONObject removeFriend(String id, String token) {
+    public static JSONObject removeFriend(String id  ) {
 
         String scope = "friendship";
         String method = "removeFriend";
@@ -209,7 +209,7 @@ public class UserLogged extends User implements JSONStringer {
         JSONObject finalObject = new JSONObject();
 
         try {
-            headerObject.put("token", token);
+            headerObject.put("token", getUserLoggedInstance().getToken());
             procedureObject.put("scope", scope);
             procedureObject.put("method", method);
             payloadObject.put("id", id);
@@ -223,7 +223,7 @@ public class UserLogged extends User implements JSONStringer {
         return finalObject;
     }
 
-    public static JSONObject rejectFriend(String id, String token) {
+    public static JSONObject rejectFriend(String id) {
 
         String scope = "friendship";
         String method = "rejectFriendshipInvite";
@@ -234,7 +234,7 @@ public class UserLogged extends User implements JSONStringer {
         JSONObject finalObject = new JSONObject();
 
         try {
-            headerObject.put("token", token);
+            headerObject.put("token", getUserLoggedInstance().getToken());
             procedureObject.put("scope", scope);
             procedureObject.put("method", method);
             payloadObject.put("id", id);
@@ -248,7 +248,7 @@ public class UserLogged extends User implements JSONStringer {
         return finalObject;
     }
 
-    public static JSONObject acceptFriend(String id, String token) {
+    public static JSONObject acceptFriend(String id) {
         String scope = "friendship";
         String method = "acceptFriendshipInvite";
 
@@ -258,7 +258,7 @@ public class UserLogged extends User implements JSONStringer {
         JSONObject finalObject = new JSONObject();
 
         try {
-            headerObject.put("token", token);
+            headerObject.put("token", getUserLoggedInstance().getToken());
             procedureObject.put("scope", scope);
             procedureObject.put("method", method);
             payloadObject.put("id", id);
@@ -272,7 +272,7 @@ public class UserLogged extends User implements JSONStringer {
         return finalObject;
     }
 
-    public static JSONObject getFriends(String token) {
+    public static JSONObject getFriends() {
         String scope = "friendship";
         String method = "getFriendsList";
 
@@ -282,7 +282,7 @@ public class UserLogged extends User implements JSONStringer {
         JSONObject finalObject = new JSONObject();
 
         try {
-            headerObject.put("token", token);
+            headerObject.put("token", getUserLoggedInstance().getToken());
             procedureObject.put("scope", scope);
             procedureObject.put("method", method);
             finalObject.put("procedure", procedureObject);
@@ -296,7 +296,7 @@ public class UserLogged extends User implements JSONStringer {
     }
 
 
-    public static JSONObject getFriendsRequests(String token) {
+    public static JSONObject getFriendsRequests() {
         String scope = "friendship";
         String method = "getInvitesList";
 
@@ -306,7 +306,7 @@ public class UserLogged extends User implements JSONStringer {
         JSONObject finalObject = new JSONObject();
 
         try {
-            headerObject.put("token", token);
+            headerObject.put("token", getUserLoggedInstance().getToken());
             procedureObject.put("scope", scope);
             procedureObject.put("method", method);
             finalObject.put("procedure", procedureObject);
@@ -319,7 +319,7 @@ public class UserLogged extends User implements JSONStringer {
         return finalObject;
     }
 
-    public static JSONObject updateInfo(String id, String token, String username, String password, String email) {
+    public static JSONObject updateInfo(String id, String username, String password, String email) {
         String scope = "user";
         String method = "update";
 
@@ -330,7 +330,7 @@ public class UserLogged extends User implements JSONStringer {
         JSONObject dataObject = new JSONObject();
 
         try {
-            headerObject.put("token", token);
+            headerObject.put("token", getUserLoggedInstance().getToken());
 
             procedureObject.put("scope", scope);
             procedureObject.put("method", method);
@@ -352,7 +352,7 @@ public class UserLogged extends User implements JSONStringer {
         return finalObject;
     }
 
-    public static JSONObject LoggedUserInfo(String token) {
+    public static JSONObject loggedUserInfo() {
 
         String scope = "user";
         String method = "me";
@@ -363,7 +363,7 @@ public class UserLogged extends User implements JSONStringer {
         JSONObject finalObject = new JSONObject();
 
         try {
-            headerObject.put("token", token);
+            headerObject.put("token", getUserLoggedInstance().getToken());
             procedureObject.put("scope", scope);
             procedureObject.put("method", method);
             finalObject.put("procedure", procedureObject);

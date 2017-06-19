@@ -112,7 +112,7 @@ public class SearchFriendsActivity extends AppCompatActivity
     {
         boolean send = false;
         WSocket wSocket = WSocket.getwSocketInstance();
-        wSocket.sendData(UserLogged.addFriend(Integer.toString(id), UserLogged.getUserLoggedInstance().getToken()).toString());
+        wSocket.sendData(UserLogged.addFriend(Integer.toString(id)).toString());
         
         synchronized (wSocket.notifier)
         {
