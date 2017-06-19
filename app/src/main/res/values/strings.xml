@@ -1,25 +1,40 @@
 <resources>
     <string name="app_name">Talker</string>
 
-    <string name="incorrectLogin">Niepoprawny login lub hasło</string>
-    <string name="login_placeholder">Login</string>
+    <string name="invite_user">Zaproś</string>
+    <string name="talk">Zaproś do rozmowy</string>
+    <string name="chat">Rozmawiaj</string>
+    <string name="accept_invitation">Akceptuj</string>
+    <string name="reject_invitation">Odczuć</string>
+    <string name="invitation">Zaproszenia do znajomych</string>
+    <string name="incorrect_login">Niepoprawny email lub hasło</string>
+    <string name="error_email_exist">Niepoprawny email lub hasło</string>
+    <string name="empty_data">To pole nie może być puste</string>
+    <string name="logged">Zalogowano.</string>
+    <string name="apply_changes">Zatwierdź zmiany</string>
+    <string name="username_placeholder">Nazwa użytkownika</string>
+    <string name="email_placeholder">Email</string>
     <string name="password_placeholder">Hasło</string>
+    <string name="password_confirm_placeholder">Powtórz hasło</string>
     <string name="log_in">Zaloguj</string>
     <string name="register_info">Nie masz konta?</string>
     <string name="register_button">Zarejestruj się</string>
         <string name="register_title">Rejestracja</string>
+        <string name="register_password_error">Hasła nie pasują do siebie</string>
+        <string name="register_success">Rejestracja zakończona pomyślnie.</string>
+        <string name="register_error">Wystąpił błąd podczas rejestracji</string>
         <string name="register_username">Nazwa użytkownika:</string>
         <string name="register_email">E-mail:</string>
         <string name="register_password">Hasło:</string>
         <string name="register_password2">Powtórz hasło:</string>
 
     <string name="my_profile">Mój profil</string>
+    <string name="my_friends">Znajomi</string>
+    <string name="friends_search">Szukaj znajomych</string>
     <string name="settings">Ustawienia</string>
     <string name="logout">Wyloguj</string>
-    <string name="my_friends">Znajomi</string>
 
-
-    <string name="contacts_title">Kontakty</string>
+    <string name="contacts_title">Rozmowy</string>
     <string name="new_message_placeholder">Wprowadź nową wiadomość</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

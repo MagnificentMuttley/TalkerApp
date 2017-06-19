@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -14,33 +13,35 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import talkerapp.talkerapp.friendsList.FriendsListAdapter;
+import talkerapp.talkerapp.userList.UserListAdapter;
 import javaClasses.UserLogged;
 import javaClasses.UserRegistered;
 import javaClasses.WSocket;
 
-public class FriendsListActivity extends AppCompatActivity {
+public class SearchFriendsActivity extends AppCompatActivity
+{
     private ArrayList<MyButton> buttons;
     private ListView usersContainer;
-    private FriendsListAdapter adapter;
-    private ArrayList<UserRegistered> friends;
+    private UserListAdapter adapter;
+    private ArrayList<UserRegistered> registeredUsers;
     private Toolbar toolbar;
     
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.friends_list_screen);
+        setContentView(R.layout.search_friends_screen);
         Intent intent = getIntent();
         
         initControls();
         
-        getAllFriends();
-        for(int i = 0; i < friends.size(); i++)
+        getRegisteredUsers();
+        for(int i = 0; i< registeredUsers.size(); i++)
         {
-            UserRegistered user = friends.get(i);
+            UserRegistered user = registeredUsers.get(i);
             MyButton button = buttons.get(i);
             displayItem(user, button);
+            
         }
     }
     
@@ -48,18 +49,18 @@ public class FriendsListActivity extends AppCompatActivity {
     protected void onDestroy()
     {
         super.onDestroy();
-        friends.clear();
+        registeredUsers.clear();
         buttons.clear();
     }
     
     private void initControls() {
         toolbar = (Toolbar)findViewById(R.id.toolbarT);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(R.string.my_friends);
+        toolbar.setTitle(R.string.friends_search);
         
         buttons = new ArrayList<MyButton>();
-        friends = new ArrayList<UserRegistered>();
-        adapter = new FriendsListAdapter(FriendsListActivity.this, new ArrayList<UserRegistered>(), new ArrayList<MyButton>());
+        registeredUsers = new ArrayList<UserRegistered>();
+        adapter = new UserListAdapter(SearchFriendsActivity.this, new ArrayList<UserRegistered>(), new ArrayList<MyButton>());
         
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -72,7 +73,7 @@ public class FriendsListActivity extends AppCompatActivity {
             }
         });
         
-        usersContainer = (ListView) findViewById(R.id.friendsContainer);
+        usersContainer = (ListView) findViewById(R.id.usersContainer);
         RelativeLayout container = (RelativeLayout) findViewById(R.id.container);
         
         usersContainer.setAdapter(adapter);
@@ -82,64 +83,47 @@ public class FriendsListActivity extends AppCompatActivity {
         adapter.add(user, button);
         adapter.notifyDataSetChanged();
     }
-
-    protected void getAllFriends() {
+    
+    protected void getRegisteredUsers()
+    {
         WSocket wSocket = WSocket.getwSocketInstance();
-        wSocket.sendData(UserLogged.getFriends(UserLogged.getUserLoggedInstance().getToken()).toString());
-
+        wSocket.sendData(UserRegistered.getAllUsers(UserLogged.getUserLoggedInstance().getToken()).toString());
+        
         synchronized (wSocket.notifier) {
             try {
-                wSocket.notifier.wait(5000);
-
+                wSocket.notifier.wait();
+                
                 JSONArray payload = wSocket.jsonMsg.getJSONArray("payload");
-                for (int i = 0; i < payload.length(); i++) {
+                for (int i =0; i<payload.length();i++) {
                     JSONObject userRegistered = payload.getJSONObject(i);
                     UserRegistered registered = new UserRegistered(userRegistered.getString("username"),
                             userRegistered.getString("email"),
                             userRegistered.getString("id"));
-                    friends.add(registered);
-                    Log.d("Friend: ", registered.getUsername());
+                    registeredUsers.add(registered);
                     buttons.add(new MyButton(this, Integer.parseInt(registered.getId())));
                 }
-                UserLogged.setFriends(friends);
-
+                
             } catch (Exception exep) {
             }
         }
-
     }
-
-    public static void inviteToChat(int id)
+    
+    public static boolean sendInvitation(int id)
     {
-        WSocket wSocket=WSocket.getwSocketInstance();
-        // tutaj dodaj id
-        wSocket.sendData(UserLogged.inviteToChat(Integer.toString(id), UserLogged.getUserLoggedInstance().getToken()).toString());
-
-        synchronized (wSocket.notifier) {
-            try {
-                wSocket.notifier.wait(4000);
-
-            } catch (Exception exep) {
-            }
-//            getAllFriends();
-        }
-    }
-
-    public static void removeFromFriends(int id)
-    {
-        boolean dodano = false;
+        boolean send = false;
         WSocket wSocket = WSocket.getwSocketInstance();
-        wSocket.sendData(UserLogged.removeFriend(Integer.toString(id), UserLogged.getUserLoggedInstance().getToken()).toString());
-
-        synchronized (wSocket.notifier) {
+        wSocket.sendData(UserLogged.addFriend(Integer.toString(id), UserLogged.getUserLoggedInstance().getToken()).toString());
+        
+        synchronized (wSocket.notifier)
+        {
             try {
                 wSocket.notifier.wait(4000);
                 if(wSocket.status.equals("200"))
-                    dodano =true;
-
+                    send = true;
+                
             } catch (Exception exep) {
             }
-//            getAllFriends();
         }
+        return send;
     }
 }

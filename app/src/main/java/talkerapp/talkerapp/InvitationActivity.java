@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -14,31 +13,31 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import talkerapp.talkerapp.friendsList.FriendsListAdapter;
+import talkerapp.talkerapp.invitationList.InvitationListAdapter;
 import javaClasses.UserLogged;
 import javaClasses.UserRegistered;
 import javaClasses.WSocket;
 
-public class FriendsListActivity extends AppCompatActivity {
+public class InvitationActivity extends AppCompatActivity {
     private ArrayList<MyButton> buttons;
-    private ListView usersContainer;
-    private FriendsListAdapter adapter;
-    private ArrayList<UserRegistered> friends;
-    private Toolbar toolbar;
+    private ArrayList<UserRegistered> friendsRequests;
+    private ListView invitationContainer;
+    private InvitationListAdapter adapter;
+    Toolbar toolbar;
     
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.friends_list_screen);
+        setContentView(R.layout.invitation_screen);
         Intent intent = getIntent();
         
         initControls();
-        
-        getAllFriends();
-        for(int i = 0; i < friends.size(); i++)
+    
+        getFriendsRequests();
+        for(int i = 0; i< friendsRequests.size(); i++)
         {
-            UserRegistered user = friends.get(i);
+            UserRegistered user = friendsRequests.get(i);
             MyButton button = buttons.get(i);
             displayItem(user, button);
         }
@@ -48,18 +47,18 @@ public class FriendsListActivity extends AppCompatActivity {
     protected void onDestroy()
     {
         super.onDestroy();
-        friends.clear();
+        friendsRequests.clear();
         buttons.clear();
     }
     
     private void initControls() {
         toolbar = (Toolbar)findViewById(R.id.toolbarT);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(R.string.my_friends);
+        toolbar.setTitle(R.string.invitation);
         
         buttons = new ArrayList<MyButton>();
-        friends = new ArrayList<UserRegistered>();
-        adapter = new FriendsListAdapter(FriendsListActivity.this, new ArrayList<UserRegistered>(), new ArrayList<MyButton>());
+        friendsRequests = new ArrayList<UserRegistered>();
+        adapter = new InvitationListAdapter(InvitationActivity.this, new ArrayList<UserRegistered>(), new ArrayList<MyButton>());
         
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -71,21 +70,21 @@ public class FriendsListActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        
-        usersContainer = (ListView) findViewById(R.id.friendsContainer);
+    
+        invitationContainer = (ListView) findViewById(R.id.invitationContainer);
         RelativeLayout container = (RelativeLayout) findViewById(R.id.container);
-        
-        usersContainer.setAdapter(adapter);
+    
+        invitationContainer.setAdapter(adapter);
     }
     
     public void displayItem(UserRegistered user, MyButton button) {
         adapter.add(user, button);
         adapter.notifyDataSetChanged();
     }
-
-    protected void getAllFriends() {
+    
+    protected void getFriendsRequests() {
         WSocket wSocket = WSocket.getwSocketInstance();
-        wSocket.sendData(UserLogged.getFriends(UserLogged.getUserLoggedInstance().getToken()).toString());
+        wSocket.sendData(UserLogged.getFriendsRequests(UserLogged.getUserLoggedInstance().getToken()).toString());
 
         synchronized (wSocket.notifier) {
             try {
@@ -97,49 +96,53 @@ public class FriendsListActivity extends AppCompatActivity {
                     UserRegistered registered = new UserRegistered(userRegistered.getString("username"),
                             userRegistered.getString("email"),
                             userRegistered.getString("id"));
-                    friends.add(registered);
-                    Log.d("Friend: ", registered.getUsername());
+                    friendsRequests.add(registered);
                     buttons.add(new MyButton(this, Integer.parseInt(registered.getId())));
                 }
-                UserLogged.setFriends(friends);
+
 
             } catch (Exception exep) {
             }
         }
-
     }
 
-    public static void inviteToChat(int id)
+    public static boolean AcceptInvitation(int id)
     {
-        WSocket wSocket=WSocket.getwSocketInstance();
-        // tutaj dodaj id
-        wSocket.sendData(UserLogged.inviteToChat(Integer.toString(id), UserLogged.getUserLoggedInstance().getToken()).toString());
-
-        synchronized (wSocket.notifier) {
-            try {
-                wSocket.notifier.wait(4000);
-
-            } catch (Exception exep) {
-            }
-//            getAllFriends();
-        }
-    }
-
-    public static void removeFromFriends(int id)
-    {
-        boolean dodano = false;
+        boolean added = false;
+    
         WSocket wSocket = WSocket.getwSocketInstance();
-        wSocket.sendData(UserLogged.removeFriend(Integer.toString(id), UserLogged.getUserLoggedInstance().getToken()).toString());
+        
+        wSocket.sendData(UserLogged.acceptFriend(Integer.toString(id), UserLogged.getUserLoggedInstance().getToken()).toString());
 
         synchronized (wSocket.notifier) {
             try {
                 wSocket.notifier.wait(4000);
-                if(wSocket.status.equals("200"))
-                    dodano =true;
+                if (wSocket.status.equals("200"))
+                    added = true;
 
             } catch (Exception exep) {
             }
-//            getAllFriends();
         }
+        return added;
+    }
+    
+    public static boolean RejectInvitation(int id)
+    {
+        boolean rejected = false;
+        
+        WSocket wSocket = WSocket.getwSocketInstance();
+        
+        wSocket.sendData(UserLogged.rejectFriend(Integer.toString(id), UserLogged.getUserLoggedInstance().getToken()).toString());
+
+        synchronized (wSocket.notifier) {
+            try {
+                wSocket.notifier.wait(4000);
+                if (wSocket.status.equals("200"))
+                    rejected = true;
+
+            } catch (Exception exep) {
+            }
+        }
+        return rejected;
     }
 }

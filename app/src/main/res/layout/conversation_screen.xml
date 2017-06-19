@@ -1,41 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorPrimary"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <include layout="@layout/toolbar"/>
-    <include layout="@layout/send_message_bar" />
-    <!--<EditText-->
-        <!--android:id="@+id/editText2"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:ems="10"-->
-        <!--android:padding="10sp"-->
-        <!--android:inputType="textPersonName"-->
-        <!--android:hint="@string/new_message_placeholder"-->
-        <!--android:textColorHint="@color/textColorDarker"-->
-        <!--android:textColor="@color/textColorPrimary"-->
-        <!--android:background="@color/colorPrimaryDark"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_toStartOf="@+id/sendMsg"-->
-        <!--android:layout_alignTop="@+id/sendMsg"-->
-        <!--android:layout_alignParentBottom="true"/>-->
 
-    <!--<Button-->
-        <!--android:id="@+id/sendMsg"-->
-        <!--android:layout_width="50sp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_gravity="bottom"-->
-        <!--android:background="@drawable/ic_send_message"-->
-        <!--android:backgroundTint="@color/colorAccent"-->
-        <!--android:onClick="sendMsg"/>-->
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_standard">
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/messageEdit"
+            android:textColorHint="@color/textColorDarker"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/textColorPrimary"
+            android:layout_toLeftOf="@+id/chatSendButton"
+            android:hint="@string/new_message_placeholder" />
+
+        <ImageButton
+            android:id="@+id/chatSendButton"
+            android:src="@drawable/send"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@color/background_floating_material_dark"
+            android:textColor="@color/background_material_light"/>
+
+        <ListView
+            android:id="@+id/messagesContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false"
+            android:layout_marginBottom="20dp"
+            android:layout_above="@+id/messageEdit"
+            android:layout_marginTop="10dp"
+            android:listSelector="@android:color/transparent"
+            android:transcriptMode="alwaysScroll"
+            android:divider="@null" />
+
+
+    </RelativeLayout>
+</LinearLayout>

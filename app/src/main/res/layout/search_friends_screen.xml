@@ -15,7 +15,7 @@
         android:padding="@dimen/padding_standard">
 
         <ListView
-            android:id="@+id/friendsContainer"
+            android:id="@+id/usersContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="false"
