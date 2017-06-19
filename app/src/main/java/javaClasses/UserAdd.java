@@ -4,7 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by tomek on 06.05.2017.
+ * Created by javaClasses on 06.05.2017.
  */
 
 public class UserAdd extends User implements JSONStringer {

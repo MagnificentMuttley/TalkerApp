@@ -3,7 +3,7 @@ package javaClasses;
 import java.io.Serializable;
 
 /**
- * Created by tomek on 06.05.2017.
+ * Created by javaClasses on 06.05.2017.
  */
 
 public abstract class User implements Serializable, javaClasses.JSONStringer {

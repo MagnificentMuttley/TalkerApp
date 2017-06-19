@@ -4,7 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by tomek on 10.06.2017.
+ * Created by javaClasses on 10.06.2017.
  */
 
 public class UserRegistered {
@@ -18,7 +18,8 @@ public class UserRegistered {
         this.email = email;
         this.id = id;
     }
-    
+
+
     public String getUsername() {
         return username;
     }
@@ -30,7 +31,12 @@ public class UserRegistered {
     public String getId() {
         return id;
     }
-    
+
+    /**
+     * Zwraca JSONObject potrzebny do wysłania rządania o liste wszystkich zarejestrowanych użytkowników
+     * @param token Token zalogowanego uzytkownika
+     * @return
+     */
     public static JSONObject getAllUsers(String token) {
         String scope = "user";
         String method = "list";

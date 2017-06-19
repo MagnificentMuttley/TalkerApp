@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 /**
- * Created by tomek on 06.05.2017.
+ * Created by javaClasses on 06.05.2017.
  */
 
 public class WSocket {

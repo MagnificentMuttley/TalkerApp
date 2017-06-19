@@ -84,7 +84,7 @@ public class InvitationActivity extends AppCompatActivity {
     
     protected void getFriendsRequests() {
         WSocket wSocket = WSocket.getwSocketInstance();
-        wSocket.sendData(UserLogged.getFriendsRequests(UserLogged.getUserLoggedInstance().getToken()).toString());
+        wSocket.sendData(UserLogged.getFriendsRequests().toString());
 
         synchronized (wSocket.notifier) {
             try {
@@ -112,7 +112,7 @@ public class InvitationActivity extends AppCompatActivity {
     
         WSocket wSocket = WSocket.getwSocketInstance();
         
-        wSocket.sendData(UserLogged.acceptFriend(Integer.toString(id), UserLogged.getUserLoggedInstance().getToken()).toString());
+        wSocket.sendData(UserLogged.acceptFriend(Integer.toString(id)).toString());
 
         synchronized (wSocket.notifier) {
             try {
@@ -132,7 +132,7 @@ public class InvitationActivity extends AppCompatActivity {
         
         WSocket wSocket = WSocket.getwSocketInstance();
         
-        wSocket.sendData(UserLogged.rejectFriend(Integer.toString(id), UserLogged.getUserLoggedInstance().getToken()).toString());
+        wSocket.sendData(UserLogged.rejectFriend(Integer.toString(id)).toString());
 
         synchronized (wSocket.notifier) {
             try {

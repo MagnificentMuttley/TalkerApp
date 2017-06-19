@@ -127,7 +127,6 @@ public class ProfileViewActivity extends AppCompatActivity {
 
         WSocket wSocket = WSocket.getwSocketInstance();
         wSocket.sendData(UserLogged.updateInfo(UserLogged.getUserLoggedInstance().getId(),
-                UserLogged.getUserLoggedInstance().getToken(),
                 usernameTmp, passwordTmp, emailTmp).toString());
 
         synchronized (wSocket.notifier) {
