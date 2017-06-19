@@ -22,6 +22,7 @@ import javaClasses.UserToLogin;
 import javaClasses.WSocket;
 
 
+
 public class AccoutActivity extends Activity {
     private EditText login;
     private EditText password;
