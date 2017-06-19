@@ -64,6 +64,7 @@ public class MenuActivity extends AppCompatActivity
         txtViewEmail.setText(UserLogged.getUserLoggedInstance().getEmail());
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        initControls();
         getMyChats();
     }
 

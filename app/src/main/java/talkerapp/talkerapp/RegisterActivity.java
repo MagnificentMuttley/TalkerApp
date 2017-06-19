@@ -19,7 +19,7 @@ import javaClasses.UserAdd;
 import javaClasses.UserLogged;
 import javaClasses.WSocket;
 
-import static javaClasses.UserLogged.loggedUserInfo;
+import static javaClasses.UserLogged.LoggedUserInfo;
 
 public class RegisterActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -127,7 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if (wSocket.status.equals("200"))
                         {
                             String token = wSocket.payload;
-                            wSocket.sendData(loggedUserInfo(token).toString());
+                            wSocket.sendData(LoggedUserInfo(token).toString());
     
                             synchronized (wSocket.notifier)
                             {

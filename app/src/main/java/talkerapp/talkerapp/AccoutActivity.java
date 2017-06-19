@@ -21,7 +21,7 @@ import javaClasses.UserLogged;
 import javaClasses.UserToLogin;
 import javaClasses.WSocket;
 
-import static javaClasses.UserLogged.loggedUserInfo;
+import static javaClasses.UserLogged.LoggedUserInfo;
 
 public class AccoutActivity extends Activity {
     private EditText login;
@@ -88,7 +88,7 @@ public class AccoutActivity extends Activity {
                         Log.d("wSocket status", wSocket.status);
                         if (wSocket.status.equals("200")) {
                             String token = wSocket.payload;
-                            wSocket.sendData(loggedUserInfo(token).toString());
+                            wSocket.sendData(LoggedUserInfo(token).toString());
                             
                             synchronized (wSocket.notifier)
                             {
