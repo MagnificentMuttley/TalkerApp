@@ -127,7 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if (wSocket.status.equals("200"))
                         {
                             String token = wSocket.payload;
-                            wSocket.sendData(loggedUserInfo().toString());
+                            wSocket.sendData(loggedUserInfo(token).toString());
     
                             synchronized (wSocket.notifier)
                             {

@@ -352,7 +352,7 @@ public class UserLogged extends User implements JSONStringer {
         return finalObject;
     }
 
-    public static JSONObject loggedUserInfo() {
+    public static JSONObject loggedUserInfo(String token) {
 
         String scope = "user";
         String method = "me";
@@ -363,7 +363,7 @@ public class UserLogged extends User implements JSONStringer {
         JSONObject finalObject = new JSONObject();
 
         try {
-            headerObject.put("token", getUserLoggedInstance().getToken());
+            headerObject.put("token",token);
             procedureObject.put("scope", scope);
             procedureObject.put("method", method);
             finalObject.put("procedure", procedureObject);

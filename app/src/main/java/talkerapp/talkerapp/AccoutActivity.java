@@ -88,7 +88,7 @@ public class AccoutActivity extends Activity {
                         Log.d("wSocket status", wSocket.status);
                         if (wSocket.status.equals("200")) {
                             String token = wSocket.payload;
-                            wSocket.sendData(loggedUserInfo().toString());
+                            wSocket.sendData(loggedUserInfo(token).toString());
                             
                             synchronized (wSocket.notifier)
                             {
